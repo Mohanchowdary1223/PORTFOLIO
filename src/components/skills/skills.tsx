@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export const SkillsPage = () => {
@@ -81,9 +82,11 @@ export const SkillsPage = () => {
                 key={index}
                 className="dark:bg-white flex-1 bg-gray-800 rounded-xl sm:p-6 text-center transform hover:scale-105 hover:shadow-xl transition-all duration-300 border shadow-2xl border-primary flex items-center gap-1 justify-center group"
               >
-                <img
+                <Image
                   src={skill.icon}
                   alt={skill.name}
+                  height={40}
+                  width={40}
                   className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300"
                 />
                 <p className="whitespace-nowrap text-base sm:text-sm md:text-lg font-semibold dark:text-gray-700 text-gray-300">
@@ -100,9 +103,11 @@ export const SkillsPage = () => {
                 key={index}
                 className="dark:bg-white bg-gray-800 rounded-xl p-3 text-center transform hover:scale-105 hover:shadow-xl transition-all duration-300 border shadow-2xl border-primary flex items-center gap-2 justify-center group"
               >
-                <img
+                <Image
                   src={skill.icon}
                   alt={skill.name}
+                  height={40}
+                  width={40}
                   className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
                 />
                 <p className="text-sm font-semibold dark:text-gray-700 text-gray-300">

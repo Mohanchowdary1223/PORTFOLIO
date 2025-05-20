@@ -1,5 +1,4 @@
 import React from "react";
-import { BackgroundLines } from "../ui/background-lines";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";

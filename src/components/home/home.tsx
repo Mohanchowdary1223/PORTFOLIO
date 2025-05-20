@@ -1,18 +1,17 @@
 import React from "react";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
-import { BackgroundLines } from "../ui/background-lines";
 import { Button } from "../ui/button";
 
 export const HomePage = () => {
   return (
-    <BackgroundLines>
+
       <div className="min-h-screen bg-background dark:bg-white transition-colors duration-300 flex">
         {/* Hero Section */}
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)]">
           <div className="text-center max-w-5xl mx-auto ">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 animate-gradient px-4">
-              Hi, I'm Mohan Sunkara - Where creativity meets functionality.
+              Hi, I&apos;m Mohan Sunkara - Where creativity meets functionality.
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl dark:text-foreground text-gray-100 text-center max-w-3xl mx-auto mb-4 sm:mb-6 px-4">
@@ -62,7 +61,6 @@ export const HomePage = () => {
           </div>
         </section>
       </div>
-    </BackgroundLines>
   );
 };
 

@@ -26,14 +26,14 @@ export const AboutPage = () => {
           </div>
           <div className="space-y-4 px-4 sm:px-0">
             <p className="text-sm sm:text-base lg:text-lg dark:text-gray-600 text-gray-300">
-              I'm a passionate developer with a focus on crafting clean,
+              I&apos;m a passionate developer with a focus on crafting clean,
               responsive web applications. With hands-on experience in both
               frontend and backend technologies like React.js, Node.js, and
               MongoDB, I enjoy building user-friendly solutions that bring
               real-world ideas to life.
             </p>
             <p className="text-sm sm:text-base lg:text-lg dark:text-gray-600 text-gray-300">
-              When I'm not coding, you'll find me designing intuitive interfaces
+              When I&apos;m not coding, you&apos;ll find me designing intuitive interfaces
               in Figma, collaborating on team projects, or exploring new tools
               and frameworks to sharpen my skills.
             </p>
