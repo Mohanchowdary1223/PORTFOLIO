@@ -10,7 +10,7 @@ export const HomePage = () => {
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-16 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)]">
         <BackgroundLines className="flex items-center justify-center w-full  flex-col px-4">
           <div className="text-center max-w-5xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 animate-gradient px-4">
+            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 animate-gradient px-4">
               Hi, I&apos;m Mohan Sunkara - Where creativity meets functionality.
             </h1>
 

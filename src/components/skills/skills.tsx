@@ -4,22 +4,6 @@ import Image from "next/image";
 export const SkillsPage = () => {
   const skills = [
     {
-      name: "React",
-      icon: "https://img.icons8.com/?size=100&id=wPohyHO_qO1a&format=png&color=000000",
-    },
-    {
-      name: "Next.js",
-      icon: "https://img.icons8.com/?size=100&id=12276&format=png&color=000000",
-    },
-    {
-      name: "TailwindCSS",
-      icon: "https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000",
-    },
-    {
-      name: "MongoDB",
-      icon: "https://img.icons8.com/?size=100&id=8rKdRqZFLurS&format=png&color=000000",
-    },
-    {
       name: "Python",
       icon: "https://img.icons8.com/?size=100&id=13441&format=png&color=000000",
     },
@@ -28,46 +12,64 @@ export const SkillsPage = () => {
       icon: "https://img.icons8.com/?size=100&id=40670&format=png&color=000000",
     },
     {
-      name: "PostgreSQL",
-      icon: "https://img.icons8.com/?size=100&id=38561&format=png&color=000000",
-    },
-
-    {
       name: "JavaScript",
       icon: "https://img.icons8.com/?size=100&id=108784&format=png&color=000000",
     },
-    {
-      name: "Machine Learning",
-      icon: "https://img.icons8.com/?size=100&id=NL90I8YT1YnN&format=png&color=000000",
-    },
-
-    {
-      name: "Express.js",
-      icon: "https://img.icons8.com/?size=100&id=2ZOaTclOqD4q&format=png&color=000000",
-    },
-
-    {
-      name: "CSS",
-      icon: "https://img.icons8.com/?size=100&id=21278&format=png&color=000000",
-    },
+  
     {
       name: "HTML",
       icon: "https://img.icons8.com/?size=100&id=20909&format=png&color=000000",
     },
     {
+      name: "CSS",
+      icon: "https://img.icons8.com/?size=100&id=21278&format=png&color=000000",
+    },
+    {
+      name: "React",
+      icon: "https://img.icons8.com/?size=100&id=wPohyHO_qO1a&format=png&color=000000",
+    },
+    {
+      name: "Next.js",
+      icon: "https://img.icons8.com/?size=100&id=12276&format=png&color=000000",
+    },
+    {
       name: "Node.js",
       icon: "https://img.icons8.com/?size=100&id=hsPbhkOH4FMe&format=png&color=000000",
     },
-
     {
-      name: "Git",
-      icon: "https://img.icons8.com/?size=100&id=106567&format=png&color=000000",
+      name: "Express.js",
+      icon: "https://img.icons8.com/?size=100&id=2ZOaTclOqD4q&format=png&color=000000",
+    },
+  
+    {
+      name: "MongoDB",
+      icon: "https://img.icons8.com/?size=100&id=8rKdRqZFLurS&format=png&color=000000",
+    },
+    {
+      name: "PostgreSQL",
+      icon: "https://img.icons8.com/?size=100&id=38561&format=png&color=000000",
+    },
+  
+    {
+      name: "TailwindCSS",
+      icon: "https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000",
     },
     {
       name: "Figma(UI/UX)",
       icon: "https://img.icons8.com/?size=100&id=zfHRZ6i1Wg0U&format=png&color=000000",
     },
+  
+    {
+      name: "Git",
+      icon: "https://img.icons8.com/?size=100&id=106567&format=png&color=000000",
+    },
+  
+    {
+      name: "Machine Learning",
+      icon: "https://img.icons8.com/?size=100&id=NL90I8YT1YnN&format=png&color=000000",
+    },
   ];
+  
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
       {/* Skills Section */}

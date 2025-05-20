@@ -6,10 +6,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export const AboutPage = () => {
   return (
     <div className="min-h-screen mx-auto bg-background transition-colors duration-300">
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 pt-24 md:pt-32">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 pt-20 md:pt-25 flex flex-col items-center justify-center sm:pt-30">
+      <h2 className="text-3xl sm:text-4xl font-bold mb-8 md:mb-12 text-center text-foreground relative after:content-[''] after:absolute after:w-16 sm:after:w-24 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+            About
+          </h2>
         <div className="grid md:grid-cols-2 gap-8 sm:gap-6 md:gap-8 items-center max-w-5xl mx-auto">
-          <div className="relative h-50 sm:h-70 md:h-100 flex justify-center">
-            <div className="aspect-video rounded-2xl w-[65%] sm:w-[85%] md:w-[90%] h-full bg-card border-primary border-2 shadow-2xl hover:shadow-xl transition-all duration-300 p-3 sm:p-4 relative group">
+          <div className="relative h-50 sm:h-70 md:h-90 flex justify-center">
+            <div className="aspect-video rounded-2xl w-[55%] sm:w-[85%] md:w-[70%] h-full bg-card border-primary border-2 shadow-2xl hover:shadow-xl transition-all duration-300 p-3 sm:p-4 relative group">
               <div className="w-full h-full rounded-xl overflow-hidden relative">
                 <Image
                   fill

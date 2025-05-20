@@ -10,6 +10,12 @@ const Footer = () => {
     <footer className="bg-gray-900  border-t border-border">
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col justify-center gap-4 items-center space-y-4 md:space-y-0">
+        <Link
+          href="#home"
+          className="text-lg md:text-xl font-bold text-primary transition-colors"
+        >
+          Codion<span className="text-foreground">MS</span>
+        </Link>
           <div className="text-sm text-white text-center space-y-1">
             <p className="text-sm text-white text-center">
               Designed & Developed by <strong>Mohan Sunkara</strong> • Built
@@ -75,9 +81,12 @@ const Footer = () => {
           <Button
             asChild
             variant="outline"
+            
             className="bg-transparent hover:bg-transparent dark:hover:border-primary dark:border-white text-white hover:text-primary hover:border-primary transition-colors"
           >
-            <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <Link 
+        href="/Mohan_Resume.pdf"
+        download="Mohan_Resume.pdf"target="_blank" rel="noopener noreferrer">
             <FaDownload className="h-4 w-4" />
 
               Get My Resume

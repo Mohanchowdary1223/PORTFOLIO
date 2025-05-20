@@ -53,12 +53,12 @@ const Navbar = () => {
         </Link>
       ))}
       <Link
-        href="/myresume.pdf"
-        download="myresume.pdf"
+        href="/Mohan_Resume.pdf"
+        download="Mohan_Resume.pdf"
         className={cn(
           "group inline-flex h-8 w-max gap-x-1 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors",
-          "bg-background text-foreground",
-          "hover:bg-accent hover:text-primary",
+          "bg-background",
+          "hover:bg-accent text-primary",
           "border border-primary",
           "focus:bg-accent focus:text-accent-foreground focus:outline-none",
           "disabled:pointer-events-none disabled:opacity-50",
