@@ -39,7 +39,12 @@ const Navbar = () => {
           key={item.href}
           href={item.href}
           className={cn(
-            "group inline-flex h-8 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-primary border border-transparent hover:border-primary focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50",
+            "group inline-flex h-8 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors",
+            "bg-background text-foreground",
+            "hover:bg-accent hover:text-primary",
+            "border border-transparent hover:border-primary",
+            "focus:bg-accent focus:text-accent-foreground focus:outline-none",
+            "disabled:pointer-events-none disabled:opacity-50",
             isMobile && "w-full justify-start text-base"
           )}
           onClick={() => isMobile && setIsOpen(false)}
@@ -51,7 +56,12 @@ const Navbar = () => {
         href="/myresume.pdf"
         download="myresume.pdf"
         className={cn(
-          "group inline-flex h-8 w-max gap-x-1 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent border border-primary hover:text-primary focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50",
+          "group inline-flex h-8 w-max gap-x-1 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors",
+          "bg-background text-foreground",
+          "hover:bg-accent hover:text-primary",
+          "border border-primary",
+          "focus:bg-accent focus:text-accent-foreground focus:outline-none",
+          "disabled:pointer-events-none disabled:opacity-50",
           isMobile && "w-full justify-start text-base"
         )}
         onClick={() => isMobile && setIsOpen(false)}
@@ -70,7 +80,7 @@ const Navbar = () => {
           href="#home"
           className="text-lg md:text-xl font-bold text-primary transition-colors"
         >
-           Codion<span className="text-white dark:text-black">MS</span>
+          Codion<span className="text-foreground">MS</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -98,7 +108,7 @@ const Navbar = () => {
             <span className="sr-only">Toggle menu</span>
           </Button>
           {isOpen && (
-            <div className="absolute top-14 right-0 w-48 bg-background border border-primary dark:border-primary/50 rounded-md shadow-lg z-50">
+            <div className="absolute top-14 right-0 w-48 bg-background border border-primary/50 rounded-md shadow-lg z-50">
               <nav className="flex flex-col">
                 <NavItems isMobile />
               </nav>

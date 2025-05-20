@@ -1,5 +1,5 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 
 export const SkillsPage = () => {
   const skills = [
@@ -69,10 +69,10 @@ export const SkillsPage = () => {
     },
   ];
   return (
-    <div className="min-h-screen bg-background dark:bg-white transition-colors duration-300">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       {/* Skills Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 pt-24 md:pt-32">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-12 md:mb-16 text-center dark:text-gray-800 text-white relative after:content-[''] after:absolute after:w-16 sm:after:w-24 after:h-1 after:bg-blue-500 after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-12 md:mb-16 text-center text-foreground relative after:content-[''] after:absolute after:w-16 sm:after:w-24 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
           My Skills
         </h2>
         <div className="max-w-4xl mx-auto">
@@ -80,16 +80,16 @@ export const SkillsPage = () => {
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className="dark:bg-white flex-1 bg-gray-800 rounded-xl sm:p-6 text-center transform hover:scale-105 hover:shadow-xl transition-all duration-300 border shadow-2xl border-primary flex items-center gap-1 justify-center group"
+                className="bg-card flex-1 rounded-xl sm:p-6 text-center transform hover:scale-105 hover:shadow-xl transition-all duration-300 border shadow-2xl border-primary flex items-center gap-1 justify-center group"
               >
                 <Image
                   src={skill.icon}
                   alt={skill.name}
-                  height={40}
-                  width={40}
+                  width={100}
+                  height={100}
                   className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300"
                 />
-                <p className="whitespace-nowrap text-base sm:text-sm md:text-lg font-semibold dark:text-gray-700 text-gray-300">
+                <p className="whitespace-nowrap text-base sm:text-sm md:text-lg font-semibold text-foreground">
                   {skill.name}
                 </p>
               </div>
@@ -97,20 +97,20 @@ export const SkillsPage = () => {
           </div>
           
           {/* Mobile view */}
-          <div className="grid grid-cols-2 gap-3 md:hidden">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:hidden">
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className="dark:bg-white bg-gray-800 rounded-xl p-3 text-center transform hover:scale-105 hover:shadow-xl transition-all duration-300 border shadow-2xl border-primary flex items-center gap-2 justify-center group"
+                className="bg-card rounded-xl p-3 text-center transform hover:scale-105 hover:shadow-xl transition-all duration-300 border shadow-2xl border-primary flex items-center gap-2 justify-center group"
               >
                 <Image
                   src={skill.icon}
                   alt={skill.name}
-                  height={40}
-                  width={40}
+                  width={100}
+                  height={100}
                   className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
                 />
-                <p className="text-sm font-semibold dark:text-gray-700 text-gray-300">
+                <p className="text-sm font-semibold text-foreground">
                   {skill.name}
                 </p>
               </div>

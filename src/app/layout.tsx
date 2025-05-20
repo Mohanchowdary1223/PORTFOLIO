@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import {  Outfit, Dancing_Script } from "next/font/google";
+import { Outfit, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar/nav";
@@ -9,6 +9,7 @@ const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
 });
+
 const dancingScript = Dancing_Script({
   variable: "--font-dancing-script",
   subsets: ["latin"],
@@ -28,16 +29,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dancingScript.variable} ${outfit.variable} font-outfit antialiased`}
+        className={`${dancingScript.variable} ${outfit.variable} font-outfit antialiased min-h-screen bg-background text-foreground`}
       >
         <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-          <Navbar />
-        {children}
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          storageKey="portfolio-theme"
+        >
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -1,7 +1,8 @@
+
 import HomePage from "@/components/home/home";
 import { AboutPage } from "@/components/about/about";
 import SkillPage from "@/components/skills/skills";
-import { ContactPage } from "@/components/contactme/contact";
+import ContactPage from "@/components/contactme/contact";
 
 export default function Home() {
   return (
