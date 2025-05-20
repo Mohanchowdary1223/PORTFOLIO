@@ -20,6 +20,7 @@ export default function Home() {
       <div id="contact" className="relative">
         <ContactPage />
       </div>
+
       <div id="footer" className="relative">
         <Footer />
       </div>

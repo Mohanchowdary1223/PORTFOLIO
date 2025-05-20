@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope, FaDownload } from "react-icons/fa";
 import { Button } from "../ui/button";
 
 const Footer = () => {
@@ -78,6 +78,8 @@ const Footer = () => {
             className="bg-transparent hover:bg-transparent dark:hover:border-primary dark:border-white text-white hover:text-primary hover:border-primary transition-colors"
           >
             <Link href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <FaDownload className="h-4 w-4" />
+
               Get My Resume
             </Link>
           </Button>
