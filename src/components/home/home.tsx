@@ -1,14 +1,13 @@
 import React from "react";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
-import ThemeToggle from "../ThemeToggle";
 import { BackgroundLines } from "../ui/background-lines";
 import { Button } from "../ui/button";
 
 export const HomePage = () => {
   return (
     <BackgroundLines>
-      <div className="min-h-screen bg-background dark:bg-white transition-colors duration-300">
+      <div className="min-h-screen bg-background dark:bg-white transition-colors duration-300 flex">
         {/* Hero Section */}
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 flex flex-col items-center justify-center min-h-[calc(100vh-4rem)]">
           <div className="text-center max-w-5xl mx-auto ">

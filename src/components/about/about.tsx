@@ -1,7 +1,4 @@
 import React from "react";
-// import { Link } from 'react-router-dom'
-import Link from "next/link";
-import ThemeToggle from "../ThemeToggle";
 import Image from "next/image";
 
 export const AboutPage = () => {

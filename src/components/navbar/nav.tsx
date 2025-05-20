@@ -13,8 +13,8 @@ const Navbar = () => {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !(dropdownRef.current as HTMLElement).contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -33,7 +33,7 @@ const Navbar = () => {
         { href: "#about", label: "About" },
         { href: "#skills", label: "Skills" },
         { href: "/projects", label: "Projects" },
-        { href: "/contact", label: "Contact me" },
+        { href: "#contact", label: "Contact me" },
       ].map((item) => (
         <Link
           key={item.href}

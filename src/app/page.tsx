@@ -1,8 +1,7 @@
-import { ModeToggle } from "@/components/modetoggle";
-import Image from "next/image";
 import HomePage from "@/components/home/home";
 import { AboutPage } from "@/components/about/about";
 import SkillPage from "@/components/skills/skills";
+import { ContactPage } from "@/components/contactme/contact";
 
 export default function Home() {
   return (
@@ -15,6 +14,9 @@ export default function Home() {
       </div>
       <div id="skills" className="relative">
         <SkillPage />
+      </div>
+      <div id="contact" className="relative">
+        <ContactPage />
       </div>
     </main>
   );
