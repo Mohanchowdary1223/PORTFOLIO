@@ -60,8 +60,8 @@ export const SkillsPage = () => {
     },
   
     {
-      name: "Git",
-      icon: "https://img.icons8.com/?size=100&id=106567&format=png&color=000000",
+      name: "Git Hub",
+      icon: "https://img.icons8.com/?size=100&id=63777&format=png&color=000000",
     },
   
     {

@@ -4,7 +4,7 @@ import { AboutPage } from "@/components/about/about";
 import SkillPage from "@/components/skills/skills";
 import ContactPage from "@/components/contactme/contact";
 import Footer from "@/components/footer/footer";
-
+import ProjectsPage from "@/components/projects/projects";
 export default function Home() {
   return (
     <main className="relative">
@@ -17,9 +17,13 @@ export default function Home() {
       <div id="skills" className="relative">
         <SkillPage />
       </div>
+      <div id="projects" className="relative">
+        <ProjectsPage />
+      </div>
       <div id="contact" className="relative">
         <ContactPage />
       </div>
+
 
       <div id="footer" className="relative">
         <Footer />

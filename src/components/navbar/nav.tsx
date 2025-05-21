@@ -32,7 +32,7 @@ const Navbar = () => {
       {[
         { href: "#about", label: "About" },
         { href: "#skills", label: "Skills" },
-        { href: "#project", label: "Projects" },
+        { href: "#projects", label: "Projects" },
         { href: "#contact", label: "Contact me" },
       ].map((item) => (
         <Link

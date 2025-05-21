@@ -14,7 +14,7 @@ const Footer = () => {
           href="#home"
           className="text-lg md:text-xl font-bold text-primary transition-colors"
         >
-          Codion<span className="text-foreground">MS</span>
+          Codion<span className="text-white">MS</span>
         </Link>
           <div className="text-sm text-white text-center space-y-1">
             <p className="text-sm text-white text-center">
