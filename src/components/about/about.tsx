@@ -1,8 +1,54 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import useEmblaCarousel from 'embla-carousel-react';
 
 export const AboutPage = () => {
+  const [activeTab, setActiveTab] = useState("aboutme");
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    dragFree: true, 
+    containScroll: 'trimSnaps',
+    align: 'start'
+  });
+
+  // Handle scroll events
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    const index = emblaApi.selectedScrollSnap();
+    const tabs = ["aboutme", "education", "experience"];
+    setActiveTab(tabs[index]);
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on('select', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  // Auto scroll effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTab((current) => {
+        if (current === "aboutme") return "education";
+        if (current === "education") return "experience";
+        return "aboutme";
+      });
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Sync carousel with active tab
+  useEffect(() => {
+    if (emblaApi) {
+      const index = activeTab === "aboutme" ? 0 : activeTab === "education" ? 1 : 2;
+      emblaApi.scrollTo(index);
+    }
+  }, [activeTab, emblaApi]);
+
   return (
     <div className="min-h-screen mx-auto bg-background transition-colors duration-300">
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 pt-20 md:pt-18 flex flex-col items-center justify-center sm:pt-30">
@@ -27,7 +73,8 @@ export const AboutPage = () => {
 
           <div className="space-y-4 p-4 sm:p-6 rounded-2xl bg-card border-primary border-2 shadow-lg hover:shadow-xl transition-all duration-300">
             <Tabs
-              defaultValue="aboutme"
+              value={activeTab}
+              onValueChange={setActiveTab}
               className="w-full max-w-[500px] mx-auto"
             >
               <TabsList className="w-full flex gap-4">
@@ -51,142 +98,146 @@ export const AboutPage = () => {
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="aboutme" className="mt-2">
-                <div className="space-y-4">
-                <p className="text-sm sm:text-base lg:text-sm text-muted-foreground leading-relaxed text-justify">                    I&apos;m a passionate and detail-oriented web developer
-                    focused on building clean, responsive, and scalable web
-                    applications. With hands-on experience in technologies like
-                    React.js, Node.js, and MongoDB, I enjoy blending creativity
-                    with logic to deliver real-world digital solutions.{" "}
-                  </p>
-                  <p className="text-sm sm:text-base lg:text-sm text-muted-foreground leading-relaxed text-justify">
-                    My skill set spans both frontend and backend development,
-                    along with UI/UX design using Figma. I take pride in writing
-                    clean, maintainable code and continuously seek opportunities
-                    to improve through learning and experimentation.
-                  </p>
-
-                  <p className="text-sm sm:text-base lg:text-sm text-muted-foreground leading-relaxed text-justify">
-                    I enjoy collaborating on team projects and have gained
-                    practical exposure through multiple virtual internships in
-                    areas like cybersecurity, cloud, and automation. Outside of
-                    coding, I&apos;m often exploring new tools, enhancing my
-                    design skills, or diving into new tech trends to stay
-                    current.{" "}
-                  </p>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="education" className="mt-2">
-                <div className="">
-                  <div className=" p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
-                    <h3 className="text-lg font-semibold text-primary">
-                      Bachelor of Technology (B.Tech)
-                    </h3>
-                    <p className="text-base font-medium">
-                      Computer Science and Data Science Engineering
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Kakinada Institute of Engineering and Technology (KIET),
-                      Andhra Pradesh
-                    </p>
-                    <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>Expected Graduation: 2026</span>
-                      <span>Current CGPA: 7.65 / 10</span>
-                    </div>
-                  </div>
-
-                  <div className=" p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
-                    <h3 className="text-lg font-semibold text-primary">
-                      Intermediate Education (10+2)
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      SIR C.R. Reddy Intermediate College, Eluru
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Board of Intermediate Education, Andhra Pradesh
-                    </p>
-                    <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>2020 – 2022</span>
-                      <span>Percentage: 54.7%</span>
-                    </div>
-                  </div>
-
-                  <div className=" p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
-                    <h3 className="text-lg font-semibold text-primary">
-                      Secondary Education (10th Grade)
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Sai Rakesh School, Gavaravaram
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Board of Secondary Education, Andhra Pradesh
-                    </p>
-                    <div className="flex justify-between text-sm text-muted-foreground">
-                      <span>2019 – 2020</span>
-                      <span>GPA: 9.65 / 10</span>
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="experience" className="mt-2">
-                <div className="">
-                  <div className="p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                      <div>
-                        <h3 className="text-lg font-semibold text-primary">
-                          Frontend & Backend Developer
-                        </h3>
-                        <p className="text-base font-medium">KHUB, KIET</p>
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex">
+                  <div className="flex-[0_0_100%] min-w-0">
+                    <TabsContent value="aboutme" className="mt-2">
+                      <div className="space-y-4">
+                        <p className="text-sm sm:text-base lg:text-sm text-muted-foreground leading-relaxed text-justify">
+                          I&apos;m a passionate and detail-oriented web developer
+                          focused on building clean, responsive, and scalable web
+                          applications. With hands-on experience in technologies like
+                          React.js, Node.js, and MongoDB, I enjoy blending creativity
+                          with logic to deliver real-world digital solutions.{" "}
+                        </p>
+                        <p className="text-sm sm:text-base lg:text-sm text-muted-foreground leading-relaxed text-justify">
+                          My skill set spans both frontend and backend development,
+                          along with UI/UX design using Figma. I take pride in writing
+                          clean, maintainable code and continuously seek opportunities
+                          to improve through learning and experimentation.
+                        </p>
+                        <p className="text-sm sm:text-base lg:text-sm text-muted-foreground leading-relaxed text-justify">
+                          I enjoy collaborating on team projects and have gained
+                          practical exposure through multiple virtual internships in
+                          areas like cybersecurity, cloud, and automation. Outside of
+                          coding, I&apos;m often exploring new tools, enhancing my
+                          design skills, or diving into new tech trends to stay
+                          current.{" "}
+                        </p>
                       </div>
-                      <span className="text-sm text-muted-foreground">
-                        Sept 2024 – Apr 2025
-                      </span>
-                    </div>
-                    <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
-                      <li>
-                        Built internal platforms like Admin Dashboard and NLP
-                        Documentation App using React JS and Flask
-                      </li>
-                      <li>
-                        Designed responsive UIs with Tailwind CSS and CSS3
-                      </li>
-                      <li>
-                        Created complete Figma UI/UX designs for various modules
-                      </li>
-                      <li>
-                        Handled routing, API integration, and client-server
-                        communication
-                      </li>
-                    </ul>
+                    </TabsContent>
                   </div>
 
-                  <div className=" p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                      <div>
-                        <h3 className="text-lg font-semibold text-primary">
-                          Winter Intern
-                        </h3>
-                        <p className="text-base font-medium">IIIT Hyderabad</p>
+                  <div className="flex-[0_0_100%] min-w-0">
+                    <TabsContent value="education" className="mt-2">
+                      <div className="">
+                        <div className="p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
+                          <h3 className="text-lg font-semibold text-primary">
+                            Bachelor of Technology (B.Tech)
+                          </h3>
+                          <p className="text-base font-medium">
+                            Computer Science and Data Science Engineering
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            Kakinada Institute of Engineering and Technology (KIET),
+                            Andhra Pradesh
+                          </p>
+                          <div className="flex justify-between text-sm text-muted-foreground">
+                            <span>Expected Graduation: 2026</span>
+                            <span>Current CGPA: 7.65 / 10</span>
+                          </div>
+                        </div>
+
+                        <div className="p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
+                          <h3 className="text-lg font-semibold text-primary">
+                            Intermediate Education (10+2)
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            SIR C.R. Reddy Intermediate College, Eluru
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            Board of Intermediate Education, Andhra Pradesh
+                          </p>
+                          <div className="flex justify-between text-sm text-muted-foreground">
+                            <span>2020 – 2022</span>
+                            <span>Percentage: 54.7%</span>
+                          </div>
+                        </div>
+
+                        <div className="p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
+                          <h3 className="text-lg font-semibold text-primary">
+                            Secondary Education (10th Grade)
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            Sai Rakesh School, Gavaravaram
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            Board of Secondary Education, Andhra Pradesh
+                          </p>
+                          <div className="flex justify-between text-sm text-muted-foreground">
+                            <span>2019 – 2020</span>
+                            <span>GPA: 9.65 / 10</span>
+                          </div>
+                        </div>
                       </div>
-                      <span className="text-sm text-muted-foreground">
-                        Dec 2024 – Jan 2025
-                      </span>
-                    </div>
-                    <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
-                      <li>
-                        Successfully developed the initial version of the TAFEA
-                        platform using React JS
-                      </li>
-                      <li>
-                        Contributed to UI/UX design and frontend implementation
-                        under R&D mentorship
-                      </li>
-                    </ul>
+                    </TabsContent>
+                  </div>
+
+                  <div className="flex-[0_0_100%] min-w-0">
+                    <TabsContent value="experience" className="mt-2">
+                      <div className="">
+                        <div className="p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                            <div>
+                              <h3 className="text-lg font-semibold text-primary">
+                                Frontend & Backend Developer
+                              </h3>
+                              <p className="text-base font-medium">KHUB, KIET</p>
+                            </div>
+                            <span className="text-sm text-muted-foreground">
+                              Sept 2024 – Apr 2025
+                            </span>
+                          </div>
+                          <ul className="space-y-2 text-sm text-muted-foreground text-justify list-disc list-inside">
+                            <li>
+                              It is a platform which can convert img to text, audio to text, and video to text. Also we can summarize the text from pdfs. also we can translate the text from one language to another language.
+                            </li>
+
+                            <li>
+                              Created complete Figma UI/UX designs for various modules
+                            </li>
+
+                          </ul>
+                        </div>
+
+                        <div className="p-3 rounded-lg hover:bg-primary/10 transition-colors duration-200">
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                            <div>
+                              <h3 className="text-lg font-semibold text-primary">
+                                Winter Intern
+                              </h3>
+                              <p className="text-base font-medium">IIIT Hyderabad</p>
+                            </div>
+                            <span className="text-sm text-muted-foreground">
+                              Dec 2024 – Jan 2025
+                            </span>
+                          </div>
+                          <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                            <li>
+                              Successfully developed the initial version of the TAFEA
+                              platform using React JS
+                            </li>
+                            <li>
+                              Contributed to UI/UX design and frontend implementation
+                              under R&D mentorship
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </TabsContent>
                   </div>
                 </div>
-              </TabsContent>
+              </div>
             </Tabs>
           </div>
         </div>

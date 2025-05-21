@@ -9,7 +9,31 @@ import { FaDownload } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const dropdownRef = useRef(null);
+
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["home", "about", "skills", "projects", "contact"];
+      const scrollPosition = window.scrollY + 100; // Offset for better detection
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial position
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -30,19 +54,22 @@ const Navbar = () => {
       )}
     >
       {[
-        { href: "#about", label: "About" },
-        { href: "#skills", label: "Skills" },
-        { href: "#projects", label: "Projects" },
-        { href: "#contact", label: "Contact me" },
+        { href: "#about", label: "About", id: "about" },
+        { href: "#skills", label: "Skills", id: "skills" },
+        { href: "#projects", label: "Projects", id: "projects" },
+        { href: "#contact", label: "Contact me", id: "contact" },
       ].map((item) => (
         <Link
           key={item.href}
           href={item.href}
           className={cn(
             "group inline-flex h-8 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors",
-            "bg-background text-foreground",
+            "bg-background",
             "hover:bg-accent hover:text-primary",
-            "border border-transparent hover:border-primary",
+            "border",
+            activeSection === item.id
+              ? "border-primary text-primary"
+              : "border-transparent text-foreground",
             "focus:bg-accent focus:text-accent-foreground focus:outline-none",
             "disabled:pointer-events-none disabled:opacity-50",
             isMobile && "w-full justify-start text-base"

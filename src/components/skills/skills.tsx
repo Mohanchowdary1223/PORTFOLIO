@@ -16,34 +16,19 @@ export const SkillsPage = () => {
       icon: "https://img.icons8.com/?size=100&id=108784&format=png&color=000000",
     },
   
+ 
     {
-      name: "HTML",
-      icon: "https://img.icons8.com/?size=100&id=20909&format=png&color=000000",
-    },
-    {
-      name: "CSS",
-      icon: "https://img.icons8.com/?size=100&id=21278&format=png&color=000000",
-    },
-    {
-      name: "React",
+      name: "MERN Stack",
       icon: "https://img.icons8.com/?size=100&id=wPohyHO_qO1a&format=png&color=000000",
     },
     {
       name: "Next.js",
       icon: "https://img.icons8.com/?size=100&id=12276&format=png&color=000000",
     },
-    {
-      name: "Node.js",
-      icon: "https://img.icons8.com/?size=100&id=hsPbhkOH4FMe&format=png&color=000000",
-    },
-    {
-      name: "Express.js",
-      icon: "https://img.icons8.com/?size=100&id=2ZOaTclOqD4q&format=png&color=000000",
-    },
   
     {
-      name: "MongoDB",
-      icon: "https://img.icons8.com/?size=100&id=8rKdRqZFLurS&format=png&color=000000",
+      name: "TypeScript",
+      icon: "https://img.icons8.com/?size=100&id=uJM6fQYqDaZK&format=png&color=000000",
     },
     {
       name: "PostgreSQL",
@@ -99,7 +84,7 @@ export const SkillsPage = () => {
           </div>
           
           {/* Mobile view */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
             {skills.map((skill, index) => (
               <div
                 key={index}
