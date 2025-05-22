@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,6 +12,7 @@ export const ProjectsPage = () => {
     containScroll: 'trimSnaps',
     align: 'start'
   });
+  const autoScrollPaused = useRef(false);
 
   // Handle scroll events
   const onSelect = useCallback(() => {
@@ -19,6 +20,12 @@ export const ProjectsPage = () => {
     const index = emblaApi.selectedScrollSnap();
     const tabs = projects.map(project => project.button);
     setActiveTab(tabs[index]);
+    
+    // Pause auto-scroll when user interacts
+    autoScrollPaused.current = true;
+    setTimeout(() => {
+      autoScrollPaused.current = false;
+    }, 30000); // 30 seconds pause
   }, [emblaApi]);
 
   useEffect(() => {
@@ -32,12 +39,14 @@ export const ProjectsPage = () => {
   // Auto scroll effect
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveTab((current) => {
-        const currentIndex = projects.findIndex(p => p.button === current);
-        const nextIndex = (currentIndex + 1) % projects.length;
-        return projects[nextIndex].button;
-      });
-    }, 10000);
+      if (!autoScrollPaused.current) {
+        setActiveTab((current) => {
+          const currentIndex = projects.findIndex(p => p.button === current);
+          const nextIndex = (currentIndex + 1) % projects.length;
+          return projects[nextIndex].button;
+        });
+      }
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);

@@ -5,6 +5,8 @@ import SkillPage from "@/components/skills/skills";
 import ContactPage from "@/components/contactme/contact";
 import Footer from "@/components/footer/footer";
 import ProjectsPage from "@/components/projects/projects";
+import ServicesPage from "@/components/servicespage/services";
+import ExperiencePage from "@/components/Experience/Experience";
 export default function Home() {
   return (
     <main className="relative">
@@ -19,6 +21,12 @@ export default function Home() {
       </div>
       <div id="projects" className="relative">
         <ProjectsPage />
+      </div>
+      <div id="experience" className="relative">
+        <ExperiencePage />
+      </div>
+      <div id="services" className="relative">
+        <ServicesPage />
       </div>
       <div id="contact" className="relative">
         <ContactPage />

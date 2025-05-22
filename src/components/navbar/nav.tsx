@@ -15,7 +15,7 @@ const Navbar = () => {
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "skills", "projects", "contact"];
+      const sections = ["home", "about", "skills", "projects", "experience", "services", "contact"];
       const scrollPosition = window.scrollY + 100; // Offset for better detection
 
       for (const section of sections) {
@@ -50,13 +50,15 @@ const Navbar = () => {
     <div
       className={cn(
         "flex",
-        isMobile ? "flex-col gap-y-2 p-4" : "w-full gap-x-8"
+        isMobile ? "flex-col gap-y-2 p-4" : "w-full gap-x-4"
       )}
     >
       {[
         { href: "#about", label: "About", id: "about" },
         { href: "#skills", label: "Skills", id: "skills" },
         { href: "#projects", label: "Projects", id: "projects" },
+        { href: "#experience", label: "Experience", id: "experience" },
+        { href: "#services", label: "Services", id: "services" },
         { href: "#contact", label: "Contact me", id: "contact" },
       ].map((item) => (
         <Link

@@ -84,7 +84,7 @@ export const SkillsPage = () => {
           </div>
           
           {/* Mobile view */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 md:hidden">
             {skills.map((skill, index) => (
               <div
                 key={index}
