@@ -62,7 +62,7 @@ export const SkillsPage = () => {
         <h2 className="text-3xl sm:text-4xl font-bold mb-12 md:mb-16 text-center text-foreground relative after:content-[''] after:absolute after:w-16 sm:after:w-24 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
           My Skills
         </h2>
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto min-h-[60vh] flex flex-col justify-center">
           <div className="hidden md:flex md:flex-wrap justify-center gap-4">
             {skills.map((skill, index) => (
               <div
@@ -84,7 +84,7 @@ export const SkillsPage = () => {
           </div>
           
           {/* Mobile view */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 md:hidden">
+          <div className="md:hidden grid grid-cols-2 sm:grid-cols-3 gap-8">
             {skills.map((skill, index) => (
               <div
                 key={index}

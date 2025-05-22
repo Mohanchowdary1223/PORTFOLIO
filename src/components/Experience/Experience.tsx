@@ -1,66 +1,16 @@
 "use client"
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import useEmblaCarousel from 'embla-carousel-react';
-
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Experience = () => {
-  const [activeTab, setActiveTab] = useState("KHUB-KIET");
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    dragFree: true, 
-    containScroll: 'trimSnaps',
-    align: 'start'
-  });
-  const autoScrollPaused = useRef(false);
-
-  // Handle scroll events
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    const index = emblaApi.selectedScrollSnap();
-    const tabs = ["KHUB-KIET", "Winter Intern"];
-    setActiveTab(tabs[index]);
-    
-    // Pause auto-scroll when user interacts
-    autoScrollPaused.current = true;
-    setTimeout(() => {
-      autoScrollPaused.current = false;
-    }, 30000); // 30 seconds pause
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    emblaApi.on('select', onSelect);
-    return () => {
-      emblaApi.off('select', onSelect);
-    };
-  }, [emblaApi, onSelect]);
-
-  // Auto scroll effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!autoScrollPaused.current) {
-        setActiveTab((current) => {
-          if (current === "KHUB-KIET") return "Winter Intern";
-          return "KHUB-KIET";
-        });
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Sync carousel with active tab
-  useEffect(() => {
-    if (emblaApi) {
-      const index = activeTab === "KHUB-KIET" ? 0 : 1;
-      emblaApi.scrollTo(index);
-    }
-  }, [activeTab, emblaApi]);
-
   const experiences = [
     {
-      button: "KHUB-KIET",
       title: "KHUB-KIET",
       role: "UI/UX Designer, Frontend & Backend Developer",
       location: "KIET, Kakinada (On-campus)",
@@ -90,7 +40,6 @@ const Experience = () => {
       technologies: ["React JS", "HTML", "CSS", "Figma", "Flask", "MongoDB", "GridFS"]
     },
     {
-      button: "Winter Intern",
       title: "Winter Intern - IIITH",
       role: "Web Developer",
       location: "Remote",
@@ -119,82 +68,68 @@ const Experience = () => {
         </h2>
         
         <div className="max-w-4xl mx-auto">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="w-full flex flex-wrap gap-4 justify-center mb-3">
+          <div className="bg-card rounded-xl overflow-hidden shadow-2xl border-2 border-primary p-6">
+            <Accordion type="single" collapsible className="w-full">
               {experiences.map((exp, index) => (
-                <TabsTrigger
-                  key={index}
-                  value={exp.button}
-                  className="text-sm sm:text-base cursor-pointer hover:text-primary data-[state=active]:text-primary data-[state=active]:border-primary dark:text-foreground dark:hover:text-primary dark:data-[state=active]:text-primary dark:data-[state=active]:border-primary transition-colors duration-200"
-                >
-                  {exp.button}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            <div className="bg-card rounded-xl overflow-hidden shadow-2xl border border-primary p-6">
-              <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex">
-                  {experiences.map((exp, index) => (
-                    <div key={index} className="flex-[0_0_100%] min-w-0">
-                      <div>
-                        <h3 className="text-2xl font-bold mb-4 text-primary text-center border-b border-primary/30 pb-4">
-                          {exp.title}
-                        </h3>
-                        <div className="flex flex-col md:flex-row gap-6 items-start justify-center">
-                          <div className="relative h-48 w-full md:h-[400px] md:w-[400px]">
-                            <Image
-                              src={exp.image}
-                              alt={exp.title}
-                              fill
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              className="object-contain rounded-lg w-full h-full"
-                            />
+                <AccordionItem key={index} value={exp.title.toLowerCase().replace(/\s+/g, '-')}>
+                  <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline">
+                    {exp.title}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="p-4 rounded-lg hover:bg-primary/10 transition-colors duration-200 space-y-4">
+                      <div className="flex flex-col md:flex-row gap-6 items-start">
+                        <div className="relative h-48 w-full md:h-[400px] md:w-[400px]">
+                          <Image
+                            src={exp.image}
+                            alt={exp.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-contain rounded-lg w-full h-full"
+                          />
+                        </div>
+                        
+                        <div className="flex-1 space-y-4">
+                          <div className="space-y-2">
+                            <p className="text-base font-medium">{exp.role}</p>
+                            <p className="text-sm text-muted-foreground">{exp.location}</p>
+                            <p className="text-sm text-muted-foreground">{exp.duration}</p>
                           </div>
-                          
-                          <div className="flex-1 space-y-4">
-                            <div className="space-y-2">
-                              <p className="text-lg font-semibold text-primary">{exp.role}</p>
-                              <p className="text-sm text-muted-foreground">{exp.location}</p>
-                              <p className="text-sm text-muted-foreground">{exp.duration}</p>
-                            </div>
 
-                            <div className="space-y-4">
-                              {exp.contributions.map((contribution, idx) => (
-                                <div key={idx} className="space-y-2">
-                                  <h4 className="text-sm font-semibold text-primary">{contribution.title}</h4>
-                                  {Array.isArray(contribution.description) ? (
-                                    <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                                      {contribution.description.map((item, i) => (
-                                        <li key={i}>{item}</li>
-                                      ))}
-                                    </ul>
-                                  ) : (
-                                    <p className="text-sm text-muted-foreground">{contribution.description}</p>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-
-                            <div>
-                              <h4 className="text-sm font-semibold text-primary mb-2">Tools & Technologies:</h4>
-                              <div className="flex flex-wrap gap-2">
-                                {exp.technologies.map((tech, idx) => (
-                                  <span key={idx} className="px-2 py-1 text-xs bg-primary/10 rounded-full text-primary">
-                                    {tech}
-                                  </span>
-                                ))}
+                          <div className="space-y-4">
+                            {exp.contributions.map((contribution, idx) => (
+                              <div key={idx} className="space-y-2">
+                                <h4 className="text-sm font-semibold text-primary">{contribution.title}</h4>
+                                {Array.isArray(contribution.description) ? (
+                                  <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                                    {contribution.description.map((item, i) => (
+                                      <li key={i}>{item}</li>
+                                    ))}
+                                  </ul>
+                                ) : (
+                                  <p className="text-sm text-muted-foreground">{contribution.description}</p>
+                                )}
                               </div>
+                            ))}
+                          </div>
+
+                          <div>
+                            <h4 className="text-sm font-semibold text-primary mb-2">Tools & Technologies:</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {exp.technologies.map((tech, idx) => (
+                                <span key={idx} className="px-2 py-1 text-xs bg-primary/10 rounded-full text-primary">
+                                  {tech}
+                                </span>
+                              ))}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Tabs>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </section>
     </div>

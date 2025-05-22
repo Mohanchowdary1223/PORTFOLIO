@@ -2,12 +2,6 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import useEmblaCarousel from 'embla-carousel-react';
 
 export const AboutPage = () => {
@@ -23,7 +17,7 @@ export const AboutPage = () => {
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     const index = emblaApi.selectedScrollSnap();
-    const tabs = ["aboutme", "education", "experience"];
+    const tabs = ["aboutme", "education"];
     setActiveTab(tabs[index]);
     
     // Pause auto-scroll when user interacts
@@ -47,7 +41,7 @@ export const AboutPage = () => {
       if (!autoScrollPaused.current) {
         setActiveTab((current) => {
           if (current === "aboutme") return "education";
-          if (current === "education") return "experience";
+          if (current === "education") return "aboutme";
           return "aboutme";
         });
       }
@@ -59,7 +53,7 @@ export const AboutPage = () => {
   // Sync carousel with active tab
   useEffect(() => {
     if (emblaApi) {
-      const index = activeTab === "aboutme" ? 0 : activeTab === "education" ? 1 : 2;
+      const index = activeTab === "aboutme" ? 0 : 1;
       emblaApi.scrollTo(index);
     }
   }, [activeTab, emblaApi]);
@@ -104,12 +98,6 @@ export const AboutPage = () => {
                   className="text-sm sm:text-base cursor-pointer hover:text-primary  data-[state=active]:text-primary data-[state=active]:border-primary dark:text-foreground dark:hover:text-primary dark:data-[state=active]:text-primary dark:data-[state=active]:border-primary transition-colors duration-200"
                 >
                   Education
-                </TabsTrigger>
-                <TabsTrigger
-                  value="experience"
-                  className="text-sm sm:text-base cursor-pointer hover:text-primary data-[state=active]:text-primary data-[state=active]:border-primary dark:text-foreground dark:hover:text-primary dark:data-[state=active]:text-primary dark:data-[state=active]:border-primary transition-colors duration-200"
-                >
-                  Experience
                 </TabsTrigger>
               </TabsList>
 
@@ -195,113 +183,6 @@ export const AboutPage = () => {
                           </div>
                         </div>
                       </div>
-                    </TabsContent>
-                  </div>
-
-                  <div className="flex-[0_0_100%] min-w-0">
-                    <TabsContent value="experience" className="mt-2">
-                      <Accordion type="single" collapsible className="w-full">
-                        <AccordionItem value="khub">
-                          <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline">
-                            KHUB-KIET
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="p-4 rounded-lg hover:bg-primary/10 transition-colors duration-200 space-y-4">
-                              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                                <div>
-                                  <p className="text-base font-medium">Role: UI/UX Designer, Frontend & Backend Developer</p>
-                                  <p className="text-sm text-muted-foreground">KIET, Kakinada (On-campus)</p>
-                                </div>
-                                <span className="text-sm text-muted-foreground">
-                                  August 2024 – April 2025
-                                </span>
-                              </div>
-                              
-                              <div className="space-y-3">
-                                <div>
-                                  <h4 className="text-sm font-semibold text-primary mb-2">Key Contributions:</h4>
-                                  <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
-                                    <li>
-                                      <span className="font-medium">UI/UX Design:</span> Designed intuitive and clean user interfaces using Figma, ensuring smooth user experiences across devices
-                                    </li>
-                                    <li>
-                                      <span className="font-medium">Fullstack Development:</span>
-                                      <ul className="ml-6 mt-1 list-disc">
-                                        <li>Developed the frontend using React JS, HTML, and CSS</li>
-                                        <li>Integrated backend using Flask, connecting APIs with the frontend</li>
-                                        <li>Used MongoDB (with GridFS) to store files and user data</li>
-                                      </ul>
-                                    </li>
-                                    <li>
-                                      <span className="font-medium text-primary">Authentication Features:</span>
-                                      <ul className="ml-6 mt-1 list-disc">
-                                        <li>Implemented Forgot Password and Change Password functionalities</li>
-                                        <li>Enabled users to update profile details and delete history</li>
-                                      </ul>
-                                    </li>
-                                    <li>
-                                    <span className="font-medium text-primary">End-to-End Integration:</span> Ensured seamless communication between frontend and backend services
-                                    </li>
-                                  </ul>
-                                </div>
-
-                                <div>
-                                  <h4 className="text-sm font-semibold text-primary mb-2">Tools & Technologies:</h4>
-                                  <div className="flex flex-wrap gap-2">
-                                    {["React JS", "HTML", "CSS", "Figma", "Flask", "MongoDB", "GridFS"].map((tech) => (
-                                      <span key={tech} className="px-2 py-1 text-xs bg-primary/10 rounded-full text-primary">
-                                        {tech}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-
-                        <AccordionItem value="iiit">
-                          <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline">
-                            Winter Intern - IIITH
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="p-4 rounded-lg hover:bg-primary/10 transition-colors duration-200 space-y-4">
-                              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                                <div>
-                                  <p className="text-base font-medium">Role: Web Developer</p>
-                                  <p className="text-sm text-muted-foreground">Remote</p>
-                                </div>
-                                <span className="text-sm text-muted-foreground">
-                                  December 5, 2024 – January 5, 2025
-                                </span>
-                              </div>
-
-                              <div className="space-y-3">
-                                <div>
-                                  <h4 className="text-sm font-semibold text-primary mb-2">Project: TAFEA (Teaching Assistant for Extra-curricular Activities)</h4>
-                                  <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">
-                                    <li>Developed and tested the initial version of the platform designed to manage and assign co-curricular tasks to teaching assistants</li>
-                                    <li>Built responsive components using React JS and JavaScript</li>
-                                    <li>Worked on backend connectivity and data storage using Flask and MongoDB</li>
-                                    <li>Participated in feedback sessions with mentors, contributing to iterative development and improvements</li>
-                                  </ul>
-                                </div>
-
-                                <div>
-                                  <h4 className="text-sm font-semibold text-primary mb-2">Tools & Technologies:</h4>
-                                  <div className="flex flex-wrap gap-2">
-                                    {["React JS", "JavaScript", "Flask", "MongoDB"].map((tech) => (
-                                      <span key={tech} className="px-2 py-1 text-xs bg-primary/10 rounded-full text-primary">
-                                        {tech}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      </Accordion>
                     </TabsContent>
                   </div>
                 </div>
