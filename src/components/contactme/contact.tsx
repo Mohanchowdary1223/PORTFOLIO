@@ -1,7 +1,5 @@
 import React from "react";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 
@@ -14,9 +12,7 @@ export const ContactPage = () => {
             Get in Touch
           </h2>
           <div className="flex items-center md:flex-row flex-col justify-center gap-10">
-            {/* Contact Information */}
-            <div className="bg-card p-4 w-[90%] lg:w-[40%] md:w-[50%] sm:w-[90%] border-2 border-primary rounded-lg shadow-lg">
-              <h2 className="text-2xl font-semibold mb-6 text-foreground">Contact Information</h2>
+            <div className="bg-card p-10 w-[90%] lg:w-[40%] md:w-[50%] sm:w-[90%] border-2 border-primary rounded-lg shadow-lg ">
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
                   <div className="p-2 rounded-full bg-primary/10 text-primary">
@@ -89,49 +85,7 @@ export const ContactPage = () => {
                 </div>
               </div>
             </div>
-            {/* Contact Form */}
-            <div className="bg-card p-4 w-[90%] lg:w-[40%] md:w-[50%] sm:w-[90%] border-2 border-primary rounded-lg shadow-lg">
-              <form className="space-y-3">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Name"
-                    className="w-full"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Email"
-                    className="w-full"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Message"
-                    className="w-full min-h-[100px]"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full cursor-pointer bg-gradient-to-r bg-primary text-white hover:opacity-90 transition-opacity"
-                >
-                  Send Message
-                </Button>
-              </form>
-            </div>
+
           </div>
         </div>
       </section>

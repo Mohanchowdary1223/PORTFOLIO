@@ -8,8 +8,9 @@ export const AboutPage = () => {
   const [activeTab, setActiveTab] = useState("aboutme");
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     dragFree: true, 
-    containScroll: 'trimSnaps',
-    align: 'start'
+    containScroll: 'keepSnaps',
+    align: 'start',
+    loop: true
   });
   const autoScrollPaused = useRef(false);
 
@@ -24,7 +25,7 @@ export const AboutPage = () => {
     autoScrollPaused.current = true;
     setTimeout(() => {
       autoScrollPaused.current = false;
-    }, 30000); // 30 seconds pause
+    }, 1000); // 30 seconds pause
   }, [emblaApi]);
 
   useEffect(() => {
@@ -38,17 +39,13 @@ export const AboutPage = () => {
   // Auto scroll effect
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!autoScrollPaused.current) {
-        setActiveTab((current) => {
-          if (current === "aboutme") return "education";
-          if (current === "education") return "aboutme";
-          return "aboutme";
-        });
+      if (!autoScrollPaused.current && emblaApi) {
+        emblaApi.scrollNext();
       }
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [emblaApi]);
 
   // Sync carousel with active tab
   useEffect(() => {

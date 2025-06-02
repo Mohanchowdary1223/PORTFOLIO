@@ -76,15 +76,15 @@ const Experience = () => {
                     {exp.title}
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="p-4 rounded-lg hover:bg-primary/10 transition-colors duration-200 space-y-4">
+                    <div className="p-4 rounded-lg bg-primary/10 dark:bg-transparent transition-colors duration-200 space-y-4">
                       <div className="flex flex-col md:flex-row gap-6 items-start">
-                        <div className="relative h-48 w-full md:h-[400px] md:w-[400px]">
+                        <div className="relative h-48 w-full md:h-[400px] md:w-[400px] ">
                           <Image
                             src={exp.image}
                             alt={exp.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-contain rounded-lg w-full h-full"
+                            className="object-contain rounded-lg w-full h-full "
                           />
                         </div>
                         
