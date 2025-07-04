@@ -37,6 +37,7 @@ export const ProjectsPage = () => {
         </h2>
         
         <div className="max-w-4xl mx-auto space-y-8">
+          <div className="space-y-8 max-h-[450px] overflow-y-auto">
           {projects.map((project, index) => (
             <div key={index} className="bg-card rounded-xl overflow-hidden shadow-2xl border-2 border-primary p-6">
               <h3 className="text-2xl font-bold mb-4 text-primary text-center border-b border-primary/30 pb-4">
@@ -116,7 +117,8 @@ export const ProjectsPage = () => {
                 </div>
               </div>
             </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
     </div>

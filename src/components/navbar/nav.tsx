@@ -107,9 +107,15 @@ const Navbar = () => {
         {/* Left side - Name */}
         <Link
           href="#home"
-          className="text-lg md:text-xl font-bold text-primary transition-colors"
+          className="text-lg md:text-xl font-bold transition-colors"
         >
-          Codion<span className="text-foreground">MS</span>
+          {/* Desktop: MohanSunkara, Mobile: MS */}
+          <span className="hidden md:inline">
+            <span className="text-primary">Mohan</span>Sunkara
+          </span>
+          <span className="inline md:hidden">
+            <span className="text-primary">M</span>S
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
