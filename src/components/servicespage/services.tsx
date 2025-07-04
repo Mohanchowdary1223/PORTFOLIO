@@ -49,18 +49,7 @@ const Services = () => {
   const [marqueeDuration, setMarqueeDuration] = useState(30);
 
   useEffect(() => {
-    const updateDuration = () => {
-      if (window.innerWidth < 640) {
-        setMarqueeDuration(10); // mobile: fastest
-      } else if (window.innerWidth < 1024) {
-        setMarqueeDuration(18); // tablet: medium
-      } else {
-        setMarqueeDuration(30); // desktop: slowest
-      }
-    };
-    updateDuration();
-    window.addEventListener("resize", updateDuration);
-    return () => window.removeEventListener("resize", updateDuration);
+    setMarqueeDuration(30); // same speed for all screens
   }, []);
 
   return (
@@ -79,7 +68,7 @@ const Services = () => {
           {marqueeServices.map((service, index) => (
             <div
               key={index}
-              className="flex flex-col min-w-70  items-center justify-center gap-8 bg-card text-card-foreground shadow-2xl rounded-lg border-2 border-primary p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg dark:shadow-none"
+              className="flex flex-col min-w-[240px] sm:min-w-[280px] md:min-w-[320px] items-center justify-center gap-8 bg-card text-card-foreground shadow-2xl rounded-lg border-2 border-primary p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg dark:shadow-none"
             >
               <div className="w-16 min-w-16 mr-6 flex items-center justify-center">
                 <Image

@@ -37,7 +37,7 @@ export const ProjectsPage = () => {
         </h2>
         
         <div className="max-w-4xl mx-auto space-y-8">
-          <div className="space-y-8 max-h-[450px] overflow-y-auto">
+          <div className="space-y-8 max-h-[650px] lg:max-h-[400px] md:max-h-[350px] overflow-y-auto scrollbar-hide">
           {projects.map((project, index) => (
             <div key={index} className="bg-card rounded-xl overflow-hidden shadow-2xl border-2 border-primary p-6">
               <h3 className="text-2xl font-bold mb-4 text-primary text-center border-b border-primary/30 pb-4">
@@ -121,6 +121,15 @@ export const ProjectsPage = () => {
           </div>
         </div>
       </section>
+      <style jsx global>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };
