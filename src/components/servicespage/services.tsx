@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const Services = () => {
   const services = [
@@ -66,9 +67,13 @@ const Services = () => {
           }}
         >
           {marqueeServices.map((service, index) => (
-            <div
+            <motion.div
               key={index}
               className="flex flex-col min-w-[240px] sm:min-w-[280px] md:min-w-[320px] items-center justify-center gap-8 bg-card text-card-foreground shadow-2xl rounded-lg border-2 border-primary p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg dark:shadow-none"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.07, type: "spring" }}
             >
               <div className="w-16 min-w-16 mr-6 flex items-center justify-center">
                 <Image
@@ -87,7 +92,7 @@ const Services = () => {
                   {service.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         <style>{`

@@ -1,7 +1,6 @@
-
 import HomePage from "@/components/home/home";
-import { AboutPage } from "@/components/about/about";
-import SkillPage from "@/components/skills/skills";
+import AboutPage from "@/components/about/about";
+import SkillsPage from "@/components/skills/skills";
 import ContactPage from "@/components/contactme/contact";
 import Footer from "@/components/footer/footer";
 import ProjectsPage from "@/components/projects/projects";
@@ -17,7 +16,7 @@ export default function Home() {
         <AboutPage />
       </div>
       <div id="skills" className="relative">
-        <SkillPage />
+        <SkillsPage />
       </div>
       <div id="projects" className="relative">
         <ProjectsPage />

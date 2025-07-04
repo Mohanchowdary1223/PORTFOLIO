@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { motion } from "framer-motion";
 
 const Experience = () => {
   const experiences = [
@@ -71,62 +72,70 @@ const Experience = () => {
           <div className="bg-card rounded-xl overflow-hidden shadow-2xl border-2 border-primary p-6">
             <Accordion type="single" collapsible className="w-full">
               {experiences.map((exp, index) => (
-                <AccordionItem key={index} value={exp.title.toLowerCase().replace(/\s+/g, '-')}>
-                  <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline">
-                    {exp.title}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="p-4 rounded-lg bg-primary/10 dark:bg-transparent transition-colors duration-200 space-y-4">
-                      <div className="flex flex-col md:flex-row gap-6 items-start">
-                        <div className="relative h-48 w-full md:h-[400px] md:w-[400px] ">
-                          <Image
-                            src={exp.image}
-                            alt={exp.title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-contain rounded-lg w-full h-full "
-                          />
-                        </div>
-                        
-                        <div className="flex-1 space-y-4">
-                          <div className="space-y-2">
-                            <p className="text-base font-medium">{exp.role}</p>
-                            <p className="text-sm text-muted-foreground">{exp.location}</p>
-                            <p className="text-sm text-muted-foreground">{exp.duration}</p>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.7, delay: index * 0.15, type: "spring" }}
+                >
+                  <AccordionItem value={exp.title.toLowerCase().replace(/\s+/g, '-')}>
+                    <AccordionTrigger className="text-lg font-semibold text-primary hover:no-underline">
+                      {exp.title}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="p-4 rounded-lg bg-primary/10 dark:bg-transparent transition-colors duration-200 space-y-4">
+                        <div className="flex flex-col md:flex-row gap-6 items-start">
+                          <div className="relative h-48 w-full md:h-[400px] md:w-[400px] ">
+                            <Image
+                              src={exp.image}
+                              alt={exp.title}
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              className="object-contain rounded-lg w-full h-full "
+                            />
                           </div>
+                          
+                          <div className="flex-1 space-y-4">
+                            <div className="space-y-2">
+                              <p className="text-base font-medium">{exp.role}</p>
+                              <p className="text-sm text-muted-foreground">{exp.location}</p>
+                              <p className="text-sm text-muted-foreground">{exp.duration}</p>
+                            </div>
 
-                          <div className="space-y-4">
-                            {exp.contributions.map((contribution, idx) => (
-                              <div key={idx} className="space-y-2">
-                                <h4 className="text-sm font-semibold text-primary">{contribution.title}</h4>
-                                {Array.isArray(contribution.description) ? (
-                                  <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                                    {contribution.description.map((item, i) => (
-                                      <li key={i}>{item}</li>
-                                    ))}
-                                  </ul>
-                                ) : (
-                                  <p className="text-sm text-muted-foreground">{contribution.description}</p>
-                                )}
-                              </div>
-                            ))}
-                          </div>
-
-                          <div>
-                            <h4 className="text-sm font-semibold text-primary mb-2">Tools & Technologies:</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {exp.technologies.map((tech, idx) => (
-                                <span key={idx} className="px-2 py-1 text-xs bg-primary/10 rounded-full text-primary">
-                                  {tech}
-                                </span>
+                            <div className="space-y-4">
+                              {exp.contributions.map((contribution, idx) => (
+                                <div key={idx} className="space-y-2">
+                                  <h4 className="text-sm font-semibold text-primary">{contribution.title}</h4>
+                                  {Array.isArray(contribution.description) ? (
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                                      {contribution.description.map((item, i) => (
+                                        <li key={i}>{item}</li>
+                                      ))}
+                                    </ul>
+                                  ) : (
+                                    <p className="text-sm text-muted-foreground">{contribution.description}</p>
+                                  )}
+                                </div>
                               ))}
+                            </div>
+
+                            <div>
+                              <h4 className="text-sm font-semibold text-primary mb-2">Tools & Technologies:</h4>
+                              <div className="flex flex-wrap gap-2">
+                                {exp.technologies.map((tech, idx) => (
+                                  <span key={idx} className="px-2 py-1 text-xs bg-primary/10 rounded-full text-primary">
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
               ))}
             </Accordion>
           </div>

@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export const ProjectsPage = () => {
   const projects = [
@@ -39,7 +40,14 @@ export const ProjectsPage = () => {
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="space-y-8 max-h-[650px] lg:max-h-[400px] md:max-h-[350px] overflow-y-auto scrollbar-hide">
           {projects.map((project, index) => (
-            <div key={index} className="bg-card rounded-xl overflow-hidden shadow-2xl border-2 border-primary p-6">
+            <motion.div
+              key={index}
+              className="bg-card rounded-xl overflow-hidden shadow-2xl border-2 border-primary p-6"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.7, delay: index * 0.15, type: "spring" }}
+            >
               <h3 className="text-2xl font-bold mb-4 text-primary text-center border-b border-primary/30 pb-4">
                 {project.title}
               </h3>
@@ -116,8 +124,8 @@ export const ProjectsPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            ))}
+            </motion.div>
+          ))}
           </div>
         </div>
       </section>

@@ -3,8 +3,9 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useEmblaCarousel from 'embla-carousel-react';
+import { motion } from "framer-motion";
 
-export const AboutPage = () => {
+function AboutPage() {
   const [activeTab, setActiveTab] = useState("aboutme");
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     dragFree: true, 
@@ -62,7 +63,13 @@ export const AboutPage = () => {
           About
         </h2>
         <div className="grid md:grid-cols-2 gap-8 sm:gap-6 md:gap-8 items-center max-w-5xl mx-auto">
-          <div className="relative h-50 sm:h-70 md:h-90 flex justify-center">
+          <motion.div
+            className="relative h-50 sm:h-70 md:h-90 flex justify-center"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, type: "spring" }}
+          >
             <div className="aspect-video rounded-2xl w-[55%] sm:w-[85%] md:w-[70%] h-full bg-card border-primary border-2 shadow-2xl hover:shadow-xl transition-all duration-300 p-3 sm:p-4 relative group">
               <div className="w-full h-full rounded-xl overflow-hidden relative">
                 <Image
@@ -75,9 +82,15 @@ export const AboutPage = () => {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="space-y-4 p-4 sm:p-6 rounded-2xl bg-card border-primary border-2 shadow-lg hover:shadow-xl transition-all duration-300">
+          <motion.div
+            className="space-y-4 p-4 sm:p-6 rounded-2xl bg-card border-primary border-2 shadow-lg hover:shadow-xl transition-all duration-300"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, type: "spring", delay: 0.15 }}
+          >
             <Tabs
               value={activeTab}
               onValueChange={setActiveTab}
@@ -185,11 +198,11 @@ export const AboutPage = () => {
                 </div>
               </div>
             </Tabs>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
   );
-};
+}
 
 export default AboutPage;
