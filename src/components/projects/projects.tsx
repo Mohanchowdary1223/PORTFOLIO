@@ -2,25 +2,25 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, type Variants, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Github, ExternalLink, Calendar, Code, Folder } from "lucide-react";
 
 export const ProjectsPage = () => {
-  // Scroll-based animations
+  // Simple scroll-based animations
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 300], [0, -30]);
+  const y = useTransform(scrollY, [0, 300], [0, -20]);
   const opacity = useTransform(scrollY, [0, 150, 300], [1, 0.9, 0.8]);
-  const scale = useTransform(scrollY, [0, 300], [1, 0.98]);
 
   const projects = [
     {
-      title: "TAFEA – Teaching Assistant for Extra curricular Activities",
-      description: "A comprehensive platform built during my IIITH internship to streamline extracurricular teaching assistance. Features efficient user management, real-time coordination, and administrative tools for enhanced educational experiences.",
-      image: "/wi-img.png",
-      technologies: ["React", "Node.js", "MongoDB", "Express.js", "JavaScript", "Tailwind CSS"],
-      githubLink: "https://github.com/RCTS-K-Hub/WI2024-Team9.git",
-      category: "Full Stack Web App",
-      year: "2024"
+      title: "BloodBridge",
+      description: "A comprehensive blood donation platform that connects donors with recipients in need. Features an AI health assistant that provides specialized healthcare responses, donor search functionality, and blood donation management. The platform ensures safe and efficient blood donation processes with intelligent health guidance.",
+      image: "/bloodbridge.png", // You'll need to add this image
+      technologies: ["Next.js", "Tailwind CSS", "MongoDB", "AI Assistant", "Healthcare"],
+      githubLink: "https://github.com/Mohanchowdary1223/BloodBridge.git", // Update with actual GitHub link
+      liveLink: "https://bloodbridgemohan.vercel.app/",
+      category: "Healthcare Platform",
+      year: "2025"
     },
     {
       title: "Data Dialect",
@@ -28,80 +28,33 @@ export const ProjectsPage = () => {
       image: "/dd-img.png",
       technologies: ["React", "Flask", "NLP", "MongoDB", "Python", "AI/ML"],
       githubLink: "https://github.com/Mohanchowdary1223/NLP-K_HUB-.git",
-      category: "AI/ML Platform",
+      category: "NLP Platform",
       year: "2024"
     },
     {
-      title: "Music Recommendation System",
-      description: "An AI-powered music discovery platform that analyzes user preferences and listening patterns to deliver personalized recommendations. Utilizes advanced machine learning algorithms for enhanced music exploration.",
-      image: "/mrs-img.png",
-      technologies: ["Python", "Machine Learning", "Pandas", "Flask", "React", "Data Science"],
-      githubLink: "https://github.com/yourusername/music-recommendation",
-      liveLink: "https://github.com/Mohanchowdary1223/MRS.git",
-      category: "ML Recommendation",
+      title: "TAFEA – Teaching Assistant for Extra curricular Activities",
+      description: "A comprehensive platform built during my IIITH internship to streamline extracurricular teaching assistance. Features efficient user management, real-time coordination, and administrative tools for enhanced educational experiences.",
+      image: "/wi-img.png",
+      technologies: ["React", "Node.js", "MongoDB", "Express.js", "JavaScript", "Tailwind CSS"],
+      githubLink: "https://github.com/RCTS-K-Hub/WI2024-Team9.git",
+      category: "NGO Platform",
       year: "2024"
     },
   ];
 
-  // Enhanced Animation variants
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const headerVariants: Variants = {
-    hidden: { opacity: 0, y: -30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const projectCardVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
-      y: 60,
-      scale: 0.9,
-      rotateX: 10
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      rotateX: 0,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut",
-        type: "spring",
-        stiffness: 100
-      }
-    }
-  };
-
   return (
     <motion.div 
       className="min-h-screen bg-background transition-colors duration-300"
-      style={{ y, opacity, scale }}
+      style={{ y, opacity }}
     >
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 pt-24 md:pt-24">
         
         {/* Header */}
         <motion.div
-          variants={headerVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-12"
         >
           <div className="flex items-center justify-center gap-3 mb-3">
@@ -115,7 +68,7 @@ export const ProjectsPage = () => {
             initial={{ width: 0 }}
             whileInView={{ width: 80 }}
             viewport={{ once: false }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           />
           <p className="text-muted-foreground text-base max-w-xl mx-auto">
             A showcase of my technical expertise and creative problem-solving
@@ -123,31 +76,26 @@ export const ProjectsPage = () => {
         </motion.div>
         
         {/* Projects Grid */}
-        <motion.div 
-          className="max-w-4xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-        >
+        <div className="max-w-4xl mx-auto">
           <div className="space-y-8">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
                 className="group relative"
-                variants={projectCardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ delay: index * 0.2 }}
-                whileHover={{ y: -8 }}
-                style={{ transformStyle: "preserve-3d" }}
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ 
+                  once: false, 
+                  amount: 0.3,
+                  margin: "0px 0px -100px 0px"
+                }}
+                transition={{ 
+                  duration: 0.8, 
+                  ease: "easeOut"
+                }}
               >
-                {/* Enhanced Background Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105" />
-                
                 {/* Main Card */}
-                <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/40">
+                <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden shadow-lg">
                   
                   {/* Year Badge - Top Right */}
                   <div className="absolute top-4 right-4 z-10">
@@ -159,14 +107,11 @@ export const ProjectsPage = () => {
 
                   <div className="p-6">
                     {/* Project Title */}
-                    <motion.h3 
-                      className="text-xl lg:text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300"
-                      whileHover={{ scale: 1.02 }}
-                    >
+                    <h3 className="text-xl lg:text-2xl font-bold mb-3 text-foreground">
                       {project.title}
-                    </motion.h3>
+                    </h3>
 
-                    {/* Project Category Badge - After Title */}
+                    {/* Project Category Badge */}
                     <div className="mb-4">
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 backdrop-blur-sm rounded-full border border-primary/20">
                         <Code className="w-3 h-3 text-primary" />
@@ -176,99 +121,56 @@ export const ProjectsPage = () => {
                     
                     <div className="grid lg:grid-cols-2 gap-6 items-start">
                       
-                      {/* Enhanced Project Image */}
-                      <motion.div 
-                        className="relative overflow-hidden rounded-lg bg-background/50 border border-primary/10 shadow-md group-hover:shadow-lg transition-all duration-500"
-                        whileHover={{ scale: 1.02, rotateY: 2 }}
-                        style={{ transformStyle: "preserve-3d" }}
-                      >
+                      {/* Project Image */}
+                      <div className="relative overflow-hidden rounded-lg bg-background/50 border border-primary/10 shadow-md">
                         <div className="aspect-video relative">
                           <Image
                             src={project.image}
                             alt={project.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                            className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                            className="object-cover"
                           />
-                          {/* Enhanced Overlay on hover */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                            <motion.div 
-                              className="text-white font-semibold px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full"
-                              initial={{ scale: 0.8, y: 20 }}
-                              whileHover={{ scale: 1, y: 0 }}
-                            >
-                              View Project
-                            </motion.div>
-                          </div>
                         </div>
-                      </motion.div>
+                      </div>
                       
                       {/* Project Details */}
                       <div className="space-y-4">
                         {/* Description */}
-                        <motion.div
-                          initial={{ opacity: 0, x: 20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: false }}
-                          transition={{ delay: 0.2 }}
-                        >
+                        <div>
                           <p className="text-muted-foreground leading-relaxed text-sm text-justify">
                             {project.description}
                           </p>
-                        </motion.div>
+                        </div>
                         
                         {/* Technologies */}
-                        <motion.div
-                          initial={{ opacity: 0, x: 20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: false }}
-                          transition={{ delay: 0.3 }}
-                          className="space-y-2"
-                        >
+                        <div className="space-y-2">
                           <h4 className="text-xs font-semibold text-foreground/80 uppercase tracking-wide">
                             Technologies Used
                           </h4>
                           <div className="flex flex-wrap gap-1.5">
                             {project.technologies.map((tech, techIndex) => (
-                              <motion.span
+                              <span
                                 key={techIndex}
-                                className="px-2.5 py-1 bg-primary/10 hover:bg-primary/20 text-primary rounded-md text-xs font-medium border border-primary/20 hover:border-primary/40 transition-all duration-300 cursor-default"
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: false }}
-                                transition={{ delay: techIndex * 0.1 }}
+                                className="px-2.5 py-1 bg-primary/10 text-primary rounded-md text-xs font-medium border border-primary/20"
                               >
                                 {tech}
-                              </motion.span>
+                              </span>
                             ))}
                           </div>
-                        </motion.div>
+                        </div>
                         
-                        {/* Enhanced Action Buttons */}
-                        <motion.div 
-                          className="flex flex-wrap gap-3 pt-2"
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: false }}
-                          transition={{ delay: 0.4 }}
-                        >
+                        {/* Action Buttons */}
+                        <div className="flex flex-wrap gap-3 pt-2">
                           <Link
                             href={project.githubLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group/btn"
                           >
-                            <motion.div
-                              className="flex items-center gap-2 px-3 py-2 bg-background hover:bg-primary text-foreground hover:text-primary-foreground border-2 border-primary rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:shadow-primary/25 text-sm"
-                              whileHover={{ scale: 1.02, y: -2 }}
-                              whileTap={{ scale: 0.98 }}
-                            >
-                              <Github className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
+                            <div className="flex items-center gap-2 px-3 py-2 bg-background border-2 border-primary rounded-lg font-medium text-sm">
+                              <Github className="w-4 h-4" />
                               <span>View Code</span>
-                            </motion.div>
+                            </div>
                           </Link>
                           
                           {project.liveLink && (
@@ -276,19 +178,14 @@ export const ProjectsPage = () => {
                               href={project.liveLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group/btn"
                             >
-                              <motion.div
-                                className="flex items-center gap-2 px-3 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:shadow-primary/25 text-sm"
-                                whileHover={{ scale: 1.02, y: -2 }}
-                                whileTap={{ scale: 0.98 }}
-                              >
-                                <ExternalLink className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
+                              <div className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm">
+                                <ExternalLink className="w-4 h-4" />
                                 <span>Live Demo</span>
-                              </motion.div>
+                              </div>
                             </Link>
                           )}
-                        </motion.div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -296,7 +193,7 @@ export const ProjectsPage = () => {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </section>
     </motion.div>
   );

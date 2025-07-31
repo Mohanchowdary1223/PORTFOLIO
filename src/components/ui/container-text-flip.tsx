@@ -27,7 +27,7 @@ export function ContainerTextFlip({
 }: ContainerTextFlipProps) {
   const id = useId();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [width, setWidth] = useState(120);
+  const [width, setWidth] = useState(10);
   const textRef = React.useRef<HTMLDivElement>(null);
 
   const updateWidthForWord = () => {
@@ -58,11 +58,11 @@ export function ContainerTextFlip({
       animate={{ width }}
       transition={{ duration: animationDuration / 2000 }}
       className={cn(
-        "relative inline-block rounded-xl px-5 py-2.5 text-center text-sm sm:text-base md:text-lg font-semibold text-black dark:text-white",
-        "[background:linear-gradient(to_bottom,#f3f4f6,#e5e7eb)]",
-        "shadow-[inset_0_-2px_#d1d5db,inset_0_0_0_1px_#d1d5db,_0_4px_8px_#d1d5db]",
-        "dark:[background:linear-gradient(to_bottom,#374151,#1f2937)]",
-        "dark:shadow-[inset_0_-2px_#10171e,inset_0_0_0_1px_hsla(205,89%,46%,.24),_0_4px_8px_#00000052]",
+        "relative inline-block rounded-4xl px-5 py-2.5 text-center text-xs sm:text-xs md:text-xs font-semibold text-black dark:text-white",
+        "[background:muted-foreground]",
+        "inset_0_0_0_1px_#d1d5db,_0_4px_8px_#d1d5db]",
+        "dark:[background:muted-foreground]",
+        "dark:inset_0_0_0_1px_hsla(205,89%,46%,.24),_0_4px_8px_#00000052]",
         className,
       )}
       key={words[currentWordIndex]}

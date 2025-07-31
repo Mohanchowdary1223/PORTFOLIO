@@ -82,19 +82,15 @@ const Services = () => {
     hidden: { 
       opacity: 0, 
       y: 60,
-      scale: 0.8,
-      rotateX: 15
+      scale: 0.8
     },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      rotateX: 0,
       transition: {
         duration: 0.7,
-        ease: "easeOut",
-        type: "spring",
-        stiffness: 100
+        ease: "easeOut"
       }
     }
   };
@@ -108,7 +104,6 @@ const Services = () => {
     };
     return icons[category as keyof typeof icons] || Settings;
   };
-
 
   return (
     <motion.div 
@@ -166,14 +161,9 @@ const Services = () => {
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.3 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -5, rotateY: 3 }}
-                  style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* Background Glow Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Main Card */}
-                  <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/40 h-full">
+                  {/* Main Card - Removed all hover effects */}
+                  <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl p-4 shadow-lg h-full">
                     
                     {/* Category Badge */}
                     <div className="absolute top-3 right-3">
@@ -183,62 +173,43 @@ const Services = () => {
                       </div>
                     </div>
 
-                    {/* Service Icon */}
-                    <motion.div 
-                      className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mb-3 group-hover:bg-primary/20 transition-colors duration-300"
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    >
+                    {/* Service Icon - Removed animations */}
+                    <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mb-3">
                       <Image
                         src={service.icon}
                         alt={service.title}
                         width={24}
                         height={24}
-                        className="w-6 h-6 object-contain dark:invert group-hover:scale-110 transition-transform duration-300"
+                        className="w-6 h-6 object-contain dark:invert"
                       />
-                    </motion.div>
+                    </div>
 
                     {/* Service Content */}
                     <div className="space-y-3">
-                      <motion.h3 
-                        className="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300"
-                        whileHover={{ scale: 1.02 }}
-                      >
+                      <h3 className="text-lg font-bold text-foreground">
                         {service.title}
-                      </motion.h3>
+                      </h3>
 
                       <p className="text-muted-foreground leading-relaxed text-sm">
                         {service.description}
                       </p>
 
-                      {/* Feature Tags */}
-                      <motion.div 
-                        className="space-y-2"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: false }}
-                        transition={{ delay: 0.3 }}
-                      >
+                      {/* Feature Tags - Removed animations */}
+                      <div className="space-y-2">
                         <h4 className="text-xs font-semibold text-foreground/80 uppercase tracking-wide">
                           Key Features
                         </h4>
                         <div className="flex flex-wrap gap-1">
                           {service.features.map((feature, featureIndex) => (
-                            <motion.span
+                            <span
                               key={featureIndex}
-                              className="px-2 py-0.5 bg-primary/10 hover:bg-primary/20 text-primary rounded text-xs font-medium border border-primary/20 hover:border-primary/40 transition-all duration-300 cursor-default"
-                              whileHover={{ scale: 1.05, y: -1 }}
-                              whileTap={{ scale: 0.95 }}
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              whileInView={{ opacity: 1, scale: 1 }}
-                              viewport={{ once: false }}
-                              transition={{ delay: featureIndex * 0.1 }}
+                              className="px-2 py-0.5 bg-primary/10 text-primary rounded text-xs font-medium border border-primary/20"
                             >
                               {feature}
-                            </motion.span>
+                            </span>
                           ))}
                         </div>
-                      </motion.div>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -263,14 +234,9 @@ const Services = () => {
                       whileInView="visible"
                       viewport={{ once: false, amount: 0.3 }}
                       transition={{ delay: actualIndex * 0.1 }}
-                      whileHover={{ y: -5, rotateY: 3 }}
-                      style={{ transformStyle: "preserve-3d" }}
                     >
-                      {/* Background Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      {/* Main Card */}
-                      <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/40 h-full">
+                      {/* Main Card - Removed all hover effects */}
+                      <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl p-4 shadow-lg h-full">
                         
                         {/* Category Badge */}
                         <div className="absolute top-3 right-3">
@@ -280,62 +246,43 @@ const Services = () => {
                           </div>
                         </div>
 
-                        {/* Service Icon */}
-                        <motion.div 
-                          className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mb-3 group-hover:bg-primary/20 transition-colors duration-300"
-                          whileHover={{ rotate: 360, scale: 1.1 }}
-                          transition={{ duration: 0.6 }}
-                        >
+                        {/* Service Icon - Removed animations */}
+                        <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mb-3">
                           <Image
                             src={service.icon}
                             alt={service.title}
                             width={24}
                             height={24}
-                            className="w-6 h-6 object-contain dark:invert group-hover:scale-110 transition-transform duration-300"
+                            className="w-6 h-6 object-contain dark:invert"
                           />
-                        </motion.div>
+                        </div>
 
                         {/* Service Content */}
                         <div className="space-y-3">
-                          <motion.h3 
-                            className="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300"
-                            whileHover={{ scale: 1.02 }}
-                          >
+                          <h3 className="text-lg font-bold text-foreground">
                             {service.title}
-                          </motion.h3>
+                          </h3>
 
                           <p className="text-muted-foreground leading-relaxed text-sm">
                             {service.description}
                           </p>
 
-                          {/* Feature Tags */}
-                          <motion.div 
-                            className="space-y-2"
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: false }}
-                            transition={{ delay: 0.3 }}
-                          >
+                          {/* Feature Tags - Removed animations */}
+                          <div className="space-y-2">
                             <h4 className="text-xs font-semibold text-foreground/80 uppercase tracking-wide">
                               Key Features
                             </h4>
                             <div className="flex flex-wrap gap-1">
                               {service.features.map((feature, featureIndex) => (
-                                <motion.span
+                                <span
                                   key={featureIndex}
-                                  className="px-2 py-0.5 bg-primary/10 hover:bg-primary/20 text-primary rounded text-xs font-medium border border-primary/20 hover:border-primary/40 transition-all duration-300 cursor-default"
-                                  whileHover={{ scale: 1.05, y: -1 }}
-                                  whileTap={{ scale: 0.95 }}
-                                  initial={{ opacity: 0, scale: 0.8 }}
-                                  whileInView={{ opacity: 1, scale: 1 }}
-                                  viewport={{ once: false }}
-                                  transition={{ delay: featureIndex * 0.1 }}
+                                  className="px-2 py-0.5 bg-primary/10 text-primary rounded text-xs font-medium border border-primary/20"
                                 >
                                   {feature}
-                                </motion.span>
+                                </span>
                               ))}
                             </div>
-                          </motion.div>
+                          </div>
                         </div>
                       </div>
                     </motion.div>

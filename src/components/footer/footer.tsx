@@ -66,7 +66,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-gradient-to-b from-gray-900 to-black border-t border-primary/20 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-black border-t border-primary/20 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary),0.1)_0%,transparent_50%)] pointer-events-none" />
       
@@ -91,7 +91,7 @@ const Footer = () => {
                 transition={{ duration: 0.2 }}
               >
                 <span className="text-primary">Mohan</span>
-                <span className="text-white group-hover:text-primary/80 transition-colors duration-300">Sunkara</span>
+                <span className="text-gray-800 dark:text-white group-hover:text-primary/80 transition-colors duration-300">Sunkara</span>
               </motion.h3>
             </Link>
           </motion.div>
@@ -99,7 +99,7 @@ const Footer = () => {
           {/* Description */}
           <motion.div variants={itemVariants} className="text-center max-w-2xl">
             <div className="space-y-3">
-              <div className="flex items-center justify-center gap-2 text-white/90">
+              <div className="flex items-center justify-center gap-2 text-gray-700 dark:text-white/90">
                 <Code className="w-4 h-4 text-primary" />
                 <p className="text-sm md:text-base">
                   Designed & Developed with <motion.span 
@@ -112,18 +112,18 @@ const Footer = () => {
                 </p>
               </div>
               
-              <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
+              <div className="flex items-center justify-center gap-2 text-gray-600 dark:text-white/80 text-sm">
                 <Coffee className="w-4 h-4 text-primary" />
                 <span>Built with</span>
-                <span className="font-semibold text-blue-400">Next.js</span>
+                <span className="font-semibold text-blue-600 dark:text-blue-400">Next.js</span>
                 <span>•</span>
-                <span className="font-semibold text-cyan-400">Tailwind CSS</span>
+                <span className="font-semibold text-cyan-600 dark:text-cyan-400">Tailwind CSS</span>
                 <span>•</span>
-                <span className="font-semibold text-blue-600">TypeScript</span>
+                <span className="font-semibold text-blue-700 dark:text-blue-500">TypeScript</span>
               </div>
               
               <motion.p 
-                className="text-white/70 text-sm md:text-base italic"
+                className="text-gray-600 dark:text-white/70 text-sm md:text-base italic"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: false }}
@@ -153,7 +153,7 @@ const Footer = () => {
                     asChild
                     variant="ghost"
                     size="icon"
-                    className={`text-white/80 hover:bg-white/10 transition-all duration-300 rounded-full ${social.color} backdrop-blur-sm border border-white/10 hover:border-primary/40`}
+                    className={`text-gray-700 dark:text-white/80 hover:bg-gray-200 dark:hover:bg-white/10 transition-all duration-300 rounded-full ${social.color} backdrop-blur-sm border border-gray-300 dark:border-white/10 hover:border-primary/40`}
                   >
                     <Link
                       href={social.href}
@@ -178,7 +178,7 @@ const Footer = () => {
               <Button
                 asChild
                 variant="outline"
-                className="bg-primary/10 hover:bg-primary border-primary/40 hover:border-primary text-white hover:text-primary-foreground transition-all duration-300 backdrop-blur-sm shadow-lg hover:shadow-xl hover:shadow-primary/25"
+                className="bg-primary/10 hover:bg-primary border-primary/40 hover:border-primary text-gray-800 dark:text-white hover:text-primary-foreground transition-all duration-300 backdrop-blur-sm shadow-lg hover:shadow-xl hover:shadow-primary/25"
               >
                 <Link 
                   href="/Mohan_Resume.pdf"
@@ -203,7 +203,7 @@ const Footer = () => {
           <motion.div variants={itemVariants}>
             <motion.button
               onClick={scrollToTop}
-              className="group flex cursor-pointer items-center gap-2 text-white/60 hover:text-primary text-sm transition-colors duration-300"
+              className="group flex cursor-pointer items-center gap-2 text-gray-500 dark:text-white/60 hover:text-primary text-sm transition-colors duration-300"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -233,7 +233,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <motion.div variants={itemVariants} className="text-center">
-            <p className="text-white/60 text-sm">
+            <p className="text-gray-500 dark:text-white/60 text-sm">
               © {currentYear} <span className="text-primary font-medium">Mohan Sunkara</span>. All rights reserved.
             </p>
           </motion.div>

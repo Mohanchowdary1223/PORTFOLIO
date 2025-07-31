@@ -6,17 +6,22 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "../ThemeToggle";
 import { FaDownload } from "react-icons/fa";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("");
   const [mounted, setMounted] = useState<boolean>(false);
+  const [hasAnimated, setHasAnimated] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Handle hydration issue
   useEffect(() => {
     setMounted(true);
+    // Trigger animation only once
+    const timer = setTimeout(() => {
+      setHasAnimated(true);
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   // Track active section on scroll
@@ -53,91 +58,6 @@ const Navbar: React.FC = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Animation variants - Properly typed
-  const navbarVariants: Variants = {
-    hidden: { y: -100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const mobileMenuVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.95,
-      y: -10
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.95,
-      y: -10,
-      transition: {
-        duration: 0.2,
-        ease: "easeIn"
-      }
-    }
-  };
-
-  const mobileNavContainerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const menuItemVariants: Variants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const desktopNavVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const desktopItemVariants: Variants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }
-  };
-
   interface NavItemsProps {
     isMobile?: boolean;
   }
@@ -153,21 +73,26 @@ const Navbar: React.FC = () => {
     ];
 
     return (
-      <motion.div
+      <div
         className={cn(
           "flex",
           isMobile ? "flex-col gap-y-2 p-4" : "gap-x-2"
         )}
-        variants={isMobile ? mobileNavContainerVariants : desktopNavVariants}
-        initial="hidden"
-        animate="visible"
       >
-        {items.map((item) => (
-          <motion.div
+        {items.map((item, index) => (
+          <div
             key={item.href}
-            variants={isMobile ? menuItemVariants : desktopItemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className={cn(
+              "transform transition-all duration-300 ease-out",
+              hasAnimated 
+                ? "translate-y-0 opacity-100" 
+                : isMobile 
+                  ? "-translate-x-5 opacity-0" 
+                  : "-translate-y-2 opacity-0"
+            )}
+            style={{
+              transitionDelay: hasAnimated ? '0ms' : `${(index + 1) * 100}ms`
+            }}
           >
             <Link
               href={item.href}
@@ -181,7 +106,8 @@ const Navbar: React.FC = () => {
                   : "border-transparent text-foreground",
                 "focus:bg-accent focus:text-accent-foreground focus:outline-none",
                 "disabled:pointer-events-none disabled:opacity-50",
-                isMobile && "w-full justify-start text-base"
+                isMobile && "w-full justify-start text-base",
+                "hover:scale-105 active:scale-95 transform transition-all duration-150"
               )}
               onClick={() => {
                 if (isMobile) {
@@ -191,13 +117,21 @@ const Navbar: React.FC = () => {
             >
               {item.label}
             </Link>
-          </motion.div>
+          </div>
         ))}
         
-        <motion.div
-          variants={isMobile ? menuItemVariants : desktopItemVariants}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <div
+          className={cn(
+            "transform transition-all duration-300 ease-out",
+            hasAnimated 
+              ? "translate-y-0 opacity-100" 
+              : isMobile 
+                ? "-translate-x-5 opacity-0" 
+                : "-translate-y-2 opacity-0"
+          )}
+          style={{
+            transitionDelay: hasAnimated ? '0ms' : `${(items.length + 1) * 100}ms`
+          }}
         >
           <Link
             href="/Mohan_Resume.pdf"
@@ -209,7 +143,8 @@ const Navbar: React.FC = () => {
               "border border-primary",
               "focus:bg-accent focus:text-accent-foreground focus:outline-none",
               "disabled:pointer-events-none disabled:opacity-50",
-              isMobile && "w-full justify-start text-base"
+              isMobile && "w-full justify-start text-base",
+              "hover:scale-105 active:scale-95 transform transition-all duration-150"
             )}
             onClick={() => {
               if (isMobile) {
@@ -220,8 +155,8 @@ const Navbar: React.FC = () => {
             <FaDownload className="h-4 w-4" />
             Resume
           </Link>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     );
   };
 
@@ -260,24 +195,25 @@ const Navbar: React.FC = () => {
   }
 
   return (
-    <motion.div
-      className="fixed w-full top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-      variants={navbarVariants}
-      initial="hidden"
-      animate="visible"
+    <div 
+      className={cn(
+        "fixed w-full top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+        "transform transition-all duration-600 ease-out",
+        hasAnimated ? "translate-y-0 opacity-100" : "-translate-y-24 opacity-0"
+      )}
     >
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Left side - Name */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <div
+          className={cn(
+            "transform transition-all duration-600 ease-out",
+            hasAnimated ? "translate-x-0 opacity-100" : "-translate-x-5 opacity-0"
+          )}
+          style={{ transitionDelay: hasAnimated ? '0ms' : '200ms' }}
         >
           <Link
             href="#home"
-            className="text-lg md:text-xl font-bold transition-colors hover:text-primary"
+            className="text-lg md:text-xl font-bold transition-colors hover:text-primary hover:scale-105 active:scale-95 transform duration-150"
           >
             <span className="hidden md:inline">
               <span className="text-primary">Mohan</span>Sunkara
@@ -286,96 +222,84 @@ const Navbar: React.FC = () => {
               <span className="text-primary">M</span>S
             </span>
           </Link>
-        </motion.div>
+        </div>
 
         {/* Desktop Navigation */}
-        <motion.div
-          className="hidden md:flex items-center space-x-4"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        <div
+          className={cn(
+            "hidden md:flex items-center space-x-4",
+            "transform transition-all duration-600 ease-out",
+            hasAnimated ? "translate-x-0 opacity-100" : "translate-x-5 opacity-0"
+          )}
+          style={{ transitionDelay: hasAnimated ? '0ms' : '300ms' }}
         >
           <nav>
             <NavItems />
           </nav>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.5 }}
+          <div
+            className={cn(
+              "transform transition-all duration-400 ease-out",
+              hasAnimated ? "scale-100 opacity-100" : "scale-80 opacity-0"
+            )}
+            style={{ transitionDelay: hasAnimated ? '0ms' : '500ms' }}
           >
             <ThemeToggle />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Mobile Navigation */}
-        <motion.div
-          className="flex items-center space-x-2 md:hidden relative"
+        <div
+          className={cn(
+            "flex items-center space-x-2 md:hidden relative",
+            "transform transition-all duration-600 ease-out",
+            hasAnimated ? "translate-x-0 opacity-100" : "translate-x-5 opacity-0"
+          )}
+          style={{ transitionDelay: hasAnimated ? '0ms' : '300ms' }}
           ref={dropdownRef}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
+          <div
+            className={cn(
+              "transform transition-all duration-400 ease-out",
+              hasAnimated ? "scale-100 opacity-100" : "scale-80 opacity-0"
+            )}
+            style={{ transitionDelay: hasAnimated ? '0ms' : '400ms' }}
           >
             <ThemeToggle />
-          </motion.div>
+          </div>
           
-          <motion.div whileTap={{ scale: 0.95 }}>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-10 w-10"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.div
-                    key="x"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="h-6 w-6" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="h-6 w-6" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </motion.div>
-
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                className="absolute top-14 right-0 w-48 bg-background border border-primary/50 rounded-md shadow-lg z-50 overflow-hidden"
-                variants={mobileMenuVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-              >
-                <nav className="flex flex-col">
-                  <NavItems isMobile />
-                </nav>
-              </motion.div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-10 w-10 active:scale-95 transform transition-all duration-150"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? (
+              <X className="h-6 w-6 transition-transform duration-200" />
+            ) : (
+              <Menu className="h-6 w-6 transition-transform duration-200" />
             )}
-          </AnimatePresence>
-        </motion.div>
+            <span className="sr-only">Toggle menu</span>
+          </Button>
+
+          {/* Mobile Dropdown */}
+          <div
+            className={cn(
+              "absolute top-14 right-0 w-48 bg-background border border-primary/50 rounded-md shadow-lg z-50 overflow-hidden",
+              "transform transition-all duration-300 ease-out origin-top-right",
+              isOpen 
+                ? "scale-100 opacity-100 translate-y-0" 
+                : "scale-95 opacity-0 -translate-y-2 pointer-events-none"
+            )}
+          >
+            <nav className="flex flex-col">
+              <NavItems isMobile />
+            </nav>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 export default Navbar;
+  
