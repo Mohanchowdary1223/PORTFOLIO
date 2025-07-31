@@ -2,143 +2,303 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants, useScroll, useTransform } from "framer-motion";
+import { Github, ExternalLink, Calendar, Code, Folder } from "lucide-react";
 
 export const ProjectsPage = () => {
+  // Scroll-based animations
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 300], [0, -30]);
+  const opacity = useTransform(scrollY, [0, 150, 300], [1, 0.9, 0.8]);
+  const scale = useTransform(scrollY, [0, 300], [1, 0.98]);
+
   const projects = [
     {
       title: "TAFEA – Teaching Assistant for Extra curricular Activities",
-      description: "A platform built during my IIITH internship to streamline extracurricular teaching assistance. Developed using the MERN stack and focused on efficient user management and real-time coordination.",
-      image: "/wi-img.png", 
+      description: "A comprehensive platform built during my IIITH internship to streamline extracurricular teaching assistance. Features efficient user management, real-time coordination, and administrative tools for enhanced educational experiences.",
+      image: "/wi-img.png",
       technologies: ["React", "Node.js", "MongoDB", "Express.js", "JavaScript", "Tailwind CSS"],
-      githubLink: "https://github.com/RCTS-K-Hub/WI2024-Team9.git", 
+      githubLink: "https://github.com/RCTS-K-Hub/WI2024-Team9.git",
+      category: "Full Stack Web App",
+      year: "2024"
     },
     {
       title: "Data Dialect",
-      description: "Data Dialect is a smart content extraction and language intelligence platform that converts various data formats including images, audio, and video into editable and readable text. It also supports real-time language translation and PDF summarization, delivering concise keynotes from large documents. This tool streamlines content processing and enhances accessibility for multilingual users.",
+      description: "An intelligent content extraction and language processing platform that converts multimedia formats (images, audio, video) into editable text. Features real-time translation, PDF summarization, and multilingual accessibility tools.",
       image: "/dd-img.png",
-      technologies: ["React", "Flask", "NLP", "MongoDB"],
-      githubLink: "https://github.com/Mohanchowdary1223/NLP-K_HUB-.git", 
+      technologies: ["React", "Flask", "NLP", "MongoDB", "Python", "AI/ML"],
+      githubLink: "https://github.com/Mohanchowdary1223/NLP-K_HUB-.git",
+      category: "AI/ML Platform",
+      year: "2024"
     },
     {
       title: "Music Recommendation System",
-      description: "An AI-driven system that suggests music based on user preferences using data analysis techniques and recommendation algorithms. It enhances music discovery and personalization.",
+      description: "An AI-powered music discovery platform that analyzes user preferences and listening patterns to deliver personalized recommendations. Utilizes advanced machine learning algorithms for enhanced music exploration.",
       image: "/mrs-img.png",
-      technologies: ["Python", "Machine Learning", "Pandas", "Flask", "React"],
-      githubLink: "https://github.com/yourusername/music-recommendation", 
+      technologies: ["Python", "Machine Learning", "Pandas", "Flask", "React", "Data Science"],
+      githubLink: "https://github.com/yourusername/music-recommendation",
       liveLink: "https://github.com/Mohanchowdary1223/MRS.git",
+      category: "ML Recommendation",
+      year: "2024"
     },
   ];
 
+  // Enhanced Animation variants
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const headerVariants: Variants = {
+    hidden: { opacity: 0, y: -30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const projectCardVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 60,
+      scale: 0.9,
+      rotateX: 10
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-background transition-colors duration-300">
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 pt-24 md:pt-20">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-12 md:mb-12 text-center text-foreground relative after:content-[''] after:absolute after:w-16 sm:after:w-24 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
-          My Projects
-        </h2>
+    <motion.div 
+      className="min-h-screen bg-background transition-colors duration-300"
+      style={{ y, opacity, scale }}
+    >
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 pt-24 md:pt-24">
         
-        <div className="max-w-4xl mx-auto space-y-8">
-          <div className="space-y-8 max-h-[650px] lg:max-h-[400px] md:max-h-[350px] overflow-y-auto scrollbar-hide">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              className="bg-card rounded-xl overflow-hidden shadow-2xl border-2 border-primary p-6"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ duration: 0.7, delay: index * 0.15, type: "spring" }}
-            >
-              <h3 className="text-2xl font-bold mb-4 text-primary text-center border-b border-primary/30 pb-4">
-                {project.title}
-              </h3>
-              <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
-                <div className="relative h-48 w-full md:h-[200px] md:w-[350px]">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-contain rounded-lg w-full h-full"
-                  />
-                </div>
-                
-                <div className="space-y-4 md:w-1/2">
-                  <p className="text-muted-foreground text-justify">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 justify-center items-center">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-4 pt-2 mt-4 border-t border-primary/30 items-center justify-center">
-                    <Link
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      GitHub
-                    </Link>
-                    {project.liveLink && (
-                      <Link
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-                      >
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          />
-                        </svg>
-                        Live Demo
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        {/* Header */}
+        <motion.div
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.5 }}
+          className="text-center mb-12"
+        >
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <Folder className="w-6 h-6 text-primary" />
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
+              My <span className="text-primary">Projects</span>
+            </h2>
           </div>
-        </div>
+          <motion.div 
+            className="w-20 h-1 bg-gradient-to-r from-primary to-primary/60 mx-auto rounded-full mb-3"
+            initial={{ width: 0 }}
+            whileInView={{ width: 80 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <p className="text-muted-foreground text-base max-w-xl mx-auto">
+            A showcase of my technical expertise and creative problem-solving
+          </p>
+        </motion.div>
+        
+        {/* Projects Grid */}
+        <motion.div 
+          className="max-w-4xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+        >
+          <div className="space-y-8">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                className="group relative"
+                variants={projectCardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ y: -8 }}
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                {/* Enhanced Background Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105" />
+                
+                {/* Main Card */}
+                <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/40">
+                  
+                  {/* Year Badge - Top Right */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <div className="flex items-center gap-1 px-2 py-1 bg-background/80 backdrop-blur-sm rounded-full border border-primary/20">
+                      <Calendar className="w-3 h-3 text-muted-foreground" />
+                      <span className="text-xs text-muted-foreground">{project.year}</span>
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    {/* Project Title */}
+                    <motion.h3 
+                      className="text-xl lg:text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      {project.title}
+                    </motion.h3>
+
+                    {/* Project Category Badge - After Title */}
+                    <div className="mb-4">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 backdrop-blur-sm rounded-full border border-primary/20">
+                        <Code className="w-3 h-3 text-primary" />
+                        <span className="text-xs font-semibold text-primary">{project.category}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="grid lg:grid-cols-2 gap-6 items-start">
+                      
+                      {/* Enhanced Project Image */}
+                      <motion.div 
+                        className="relative overflow-hidden rounded-lg bg-background/50 border border-primary/10 shadow-md group-hover:shadow-lg transition-all duration-500"
+                        whileHover={{ scale: 1.02, rotateY: 2 }}
+                        style={{ transformStyle: "preserve-3d" }}
+                      >
+                        <div className="aspect-video relative">
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                            className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                          />
+                          {/* Enhanced Overlay on hover */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <motion.div 
+                              className="text-white font-semibold px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full"
+                              initial={{ scale: 0.8, y: 20 }}
+                              whileHover={{ scale: 1, y: 0 }}
+                            >
+                              View Project
+                            </motion.div>
+                          </div>
+                        </div>
+                      </motion.div>
+                      
+                      {/* Project Details */}
+                      <div className="space-y-4">
+                        {/* Description */}
+                        <motion.div
+                          initial={{ opacity: 0, x: 20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: false }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <p className="text-muted-foreground leading-relaxed text-sm text-justify">
+                            {project.description}
+                          </p>
+                        </motion.div>
+                        
+                        {/* Technologies */}
+                        <motion.div
+                          initial={{ opacity: 0, x: 20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: false }}
+                          transition={{ delay: 0.3 }}
+                          className="space-y-2"
+                        >
+                          <h4 className="text-xs font-semibold text-foreground/80 uppercase tracking-wide">
+                            Technologies Used
+                          </h4>
+                          <div className="flex flex-wrap gap-1.5">
+                            {project.technologies.map((tech, techIndex) => (
+                              <motion.span
+                                key={techIndex}
+                                className="px-2.5 py-1 bg-primary/10 hover:bg-primary/20 text-primary rounded-md text-xs font-medium border border-primary/20 hover:border-primary/40 transition-all duration-300 cursor-default"
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: false }}
+                                transition={{ delay: techIndex * 0.1 }}
+                              >
+                                {tech}
+                              </motion.span>
+                            ))}
+                          </div>
+                        </motion.div>
+                        
+                        {/* Enhanced Action Buttons */}
+                        <motion.div 
+                          className="flex flex-wrap gap-3 pt-2"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: false }}
+                          transition={{ delay: 0.4 }}
+                        >
+                          <Link
+                            href={project.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/btn"
+                          >
+                            <motion.div
+                              className="flex items-center gap-2 px-3 py-2 bg-background hover:bg-primary text-foreground hover:text-primary-foreground border-2 border-primary rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:shadow-primary/25 text-sm"
+                              whileHover={{ scale: 1.02, y: -2 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <Github className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
+                              <span>View Code</span>
+                            </motion.div>
+                          </Link>
+                          
+                          {project.liveLink && (
+                            <Link
+                              href={project.liveLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group/btn"
+                            >
+                              <motion.div
+                                className="flex items-center gap-2 px-3 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:shadow-primary/25 text-sm"
+                                whileHover={{ scale: 1.02, y: -2 }}
+                                whileTap={{ scale: 0.98 }}
+                              >
+                                <ExternalLink className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
+                                <span>Live Demo</span>
+                              </motion.div>
+                            </Link>
+                          )}
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </section>
-      <style jsx global>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
-    </div>
+    </motion.div>
   );
 };
 
