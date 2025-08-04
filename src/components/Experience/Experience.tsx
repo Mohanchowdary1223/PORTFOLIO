@@ -8,7 +8,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { motion, type Variants, useScroll, useTransform } from "framer-motion";
-import { Briefcase, MapPin, Calendar, Code, Award } from "lucide-react";
+import { Briefcase, MapPin, Calendar, Code, Award, ChevronDown } from "lucide-react";
+
 
 const Experience = () => {
   // Scroll-based animations
@@ -16,6 +17,7 @@ const Experience = () => {
   const y = useTransform(scrollY, [0, 300], [0, -30]);
   const opacity = useTransform(scrollY, [0, 150, 300], [1, 0.9, 0.8]);
   const scale = useTransform(scrollY, [0, 300], [1, 0.98]);
+
 
   const experiences = [
     {
@@ -70,6 +72,7 @@ const Experience = () => {
     }
   ];
 
+
   // Animation variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -83,6 +86,7 @@ const Experience = () => {
     }
   };
 
+
   const headerVariants: Variants = {
     hidden: { opacity: 0, y: -30 },
     visible: {
@@ -94,6 +98,7 @@ const Experience = () => {
       }
     }
   };
+
 
   const experienceCardVariants: Variants = {
     hidden: { 
@@ -112,12 +117,13 @@ const Experience = () => {
     }
   };
 
+
   return (
     <motion.div 
       className="min-h-screen bg-background transition-colors duration-300"
       style={{ y, opacity, scale }}
     >
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 pt-20 md:pt-16">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 pt-24 md:pt-24">
         
         {/* Header */}
         <motion.div
@@ -147,17 +153,17 @@ const Experience = () => {
         
         {/* Experience Cards */}
         <motion.div 
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto "
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.2 }}
         >
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                className="group relative"
+                className="group relative "
                 variants={experienceCardVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -165,7 +171,7 @@ const Experience = () => {
                 transition={{ delay: index * 0.2 }}
               >
                 {/* Main Card - Removed hover animations */}
-                <div className="relative bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden shadow-lg">
+                <div className="relative  bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl overflow-hidden shadow-lg">
                   
                   {/* Experience Type Badge */}
                   <div className="absolute top-4 right-4 z-10">
@@ -175,16 +181,21 @@ const Experience = () => {
                     </div>
                   </div>
 
+
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value={exp.title.toLowerCase().replace(/\s+/g, '-')} className="border-none">
-                      <AccordionTrigger className="text-lg font-semibold text-foreground px-6 py-4">
-                        <div className="flex items-center gap-3">
+                      <AccordionTrigger className="text-lg font-semibold text-foreground px-6 py-4 cursor-pointer">
+                        <div className="flex items-center gap-3 w-full">
                           <div className="p-2 bg-primary/10 rounded-lg">
                             <Briefcase className="w-5 h-5 text-primary" />
                           </div>
-                          <div className="text-left">
+                          <div className="text-left flex-1">
                             <div className="font-bold">{exp.title}</div>
                             <div className="text-sm text-muted-foreground font-normal">{exp.role}</div>
+                            <div className="text-xs text-primary/70 font-normal mt-1 flex items-center gap-1">
+                              <span>Click to view more</span>
+                              <ChevronDown className="w-3 h-3" />
+                            </div>
                           </div>
                         </div>
                       </AccordionTrigger>
@@ -200,18 +211,16 @@ const Experience = () => {
                               <div className="relative overflow-hidden rounded-lg bg-background/50 border  border-primary/10 shadow-md flex-shrink-0">
                                 {/* Image fills full height of container */}
                                 <div className="w-full h-80 sm:h-96 lg:w-80 lg:h-full xl:w-96 relative flex items-center justify-center bg-background/10">
-  <Image
-    src={exp.image}
-    alt={exp.title}
-    fill
-    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 320px, 384px"
-    className="object-contain"
-    style={{ objectFit: 'contain' }}
-    priority={index === 0}
-    unoptimized
-  />
-
-
+                                  <Image
+                                    src={exp.image}
+                                    alt={exp.title}
+                                    fill
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 320px, 384px"
+                                    className="object-contain"
+                                    style={{ objectFit: 'contain' }}
+                                    priority={index === 0}
+                                    unoptimized
+                                  />
                                 </div>
                               </div>
                               
@@ -229,6 +238,7 @@ const Experience = () => {
                                     <span>{exp.duration}</span>
                                   </div>
                                 </div>
+
 
                                 {/* Contributions */}
                                 <div className="space-y-4">
@@ -255,6 +265,7 @@ const Experience = () => {
                                     </div>
                                   ))}
                                 </div>
+
 
                                 {/* Technologies */}
                                 <div className="space-y-2">
@@ -288,5 +299,6 @@ const Experience = () => {
     </motion.div>
   );
 };
+
 
 export default Experience;
