@@ -133,7 +133,7 @@ export const ContactPage = () => {
     {
       icon: FaLinkedin,
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/mohan-chowdhury-a1a913281/",
+      href: "https://www.linkedin.com/in/mohan-sunkara/",
       color: "hover:bg-blue-700"
     },
     {

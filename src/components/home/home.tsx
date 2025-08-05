@@ -95,7 +95,7 @@ const HomePage: React.FC = () => {
             {[
               { href: "https://github.com/Mohanchowdary1223", icon: FaGithub, label: "GitHub" },
               { href: "mailto:mohansunkara963@gmail.com", icon: FaEnvelope, label: "Email" },
-              { href: "https://www.linkedin.com/in/mohan-chowdhury-a1a913281/", icon: FaLinkedin, label: "LinkedIn" },
+              { href: "https://www.linkedin.com/in/mohan-sunkara/", icon: FaLinkedin, label: "LinkedIn" },
               { href: "https://www.instagram.com/m_o_h_a_n__14000605", icon: FaInstagram, label: "Instagram" }
             ].map((social) => {
               const IconComponent = social.icon;

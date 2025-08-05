@@ -49,7 +49,7 @@ const Footer = () => {
     },
     {
       icon: FaLinkedin,
-      href: "https://www.linkedin.com/in/mohan-chowdhury-a1a913281/",
+      href: "https://www.linkedin.com/in/mohan-sunkara/",
       label: "LinkedIn",
       color: "hover:text-blue-500"
     },
