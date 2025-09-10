@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "../ThemeToggle";
-import { FaDownload } from "react-icons/fa";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -70,6 +69,7 @@ const Navbar: React.FC = () => {
       { href: "#experience", label: "Experience", id: "experience" },
       { href: "#services", label: "Services", id: "services" },
       { href: "#contact", label: "Contact me", id: "contact" },
+      { href: "/resume", label: "Resume", id: "resume" }, // Changed from "#resume" to "/resume"
     ];
 
     return (
@@ -119,43 +119,6 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
         ))}
-        
-        <div
-          className={cn(
-            "transform transition-all duration-300 ease-out",
-            hasAnimated 
-              ? "translate-y-0 opacity-100" 
-              : isMobile 
-                ? "-translate-x-5 opacity-0" 
-                : "-translate-y-2 opacity-0"
-          )}
-          style={{
-            transitionDelay: hasAnimated ? '0ms' : `${(items.length + 1) * 100}ms`
-          }}
-        >
-          <Link
-            href="/Mohan_Resume.pdf"
-            download="Mohan_Resume.pdf"
-            className={cn(
-              "group inline-flex h-8 w-max gap-x-1 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors",
-              "bg-background",
-              "hover:bg-accent text-primary",
-              "border border-primary",
-              "focus:bg-accent focus:text-accent-foreground focus:outline-none",
-              "disabled:pointer-events-none disabled:opacity-50",
-              isMobile && "w-full justify-start text-base",
-              "hover:scale-105 active:scale-95 transform transition-all duration-150"
-            )}
-            onClick={() => {
-              if (isMobile) {
-                setIsOpen(false);
-              }
-            }}
-          >
-            <FaDownload className="h-4 w-4" />
-            Resume
-          </Link>
-        </div>
       </div>
     );
   };
@@ -165,7 +128,7 @@ const Navbar: React.FC = () => {
     return (
       <div className="fixed w-full top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="#home" className="text-lg md:text-xl font-bold transition-colors">
+          <Link href="/" className="text-lg md:text-xl font-bold transition-colors"> {/* Changed from "#home" to "/" */}
             <span className="hidden md:inline">
               <span className="text-primary">Mohan</span>Sunkara
             </span>
@@ -176,7 +139,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-4">
             <nav className="flex space-x-2">
               <div className="flex gap-x-2">
-                {Array.from({ length: 6 }).map((_, i) => (
+                {Array.from({ length: 7 }).map((_, i) => (
                   <div key={i} className="h-8 px-4 py-2 border border-transparent rounded-md bg-background/20" />
                 ))}
               </div>
@@ -212,7 +175,7 @@ const Navbar: React.FC = () => {
           style={{ transitionDelay: hasAnimated ? '0ms' : '200ms' }}
         >
           <Link
-            href="#home"
+            href="/" // Changed from "#home" to "/"
             className="text-lg md:text-xl font-bold transition-colors hover:text-primary hover:scale-105 active:scale-95 transform duration-150"
           >
             <span className="hidden md:inline">
@@ -302,4 +265,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-  

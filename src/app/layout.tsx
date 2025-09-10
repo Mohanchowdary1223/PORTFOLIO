@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+"use client";
 import { Outfit, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar/nav";
+import { usePathname } from "next/navigation";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -16,16 +17,14 @@ const dancingScript = Dancing_Script({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Mohan Sunkara portfolio",
-  description: "Transforming ideas into web realities",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const hideNavbar = pathname === "/resume";
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -39,7 +38,7 @@ export default function RootLayout({
           storageKey="portfolio-theme"
         >
           <div className="relative flex min-h-screen flex-col">
-            <Navbar />
+            {!hideNavbar && <Navbar />}
             <main className="flex-1">{children}</main>
           </div>
         </ThemeProvider>

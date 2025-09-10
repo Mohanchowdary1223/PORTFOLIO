@@ -169,7 +169,7 @@ const Footer = () => {
             })}
           </motion.div>
 
-          {/* Resume Download Button */}
+          {/* Resume Link Button */}
           <motion.div variants={itemVariants}>
             <motion.div
               whileHover={{ scale: 1.05, y: -2 }}
@@ -181,10 +181,7 @@ const Footer = () => {
                 className="bg-primary/10 hover:bg-primary border-primary/40 hover:border-primary text-gray-800 dark:text-white hover:text-primary-foreground transition-all duration-300 backdrop-blur-sm shadow-lg hover:shadow-xl hover:shadow-primary/25"
               >
                 <Link 
-                  href="/Mohan_Resume.pdf"
-                  download="Mohan_Resume.pdf"
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  href="/resume"
                   className="flex items-center gap-2"
                 >
                   <motion.div
@@ -193,7 +190,7 @@ const Footer = () => {
                   >
                     <FaDownload className="h-4 w-4" />
                   </motion.div>
-                  Get My Resume
+                  View My Resume
                 </Link>
               </Button>
             </motion.div>
